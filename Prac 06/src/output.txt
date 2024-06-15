@@ -1,0 +1,121 @@
+Heap-Based Priority Queue Intern Scheduler
+==============================================
+Name: Intern 0 WR: 18 Energy: 100
+Name: Intern 1 WR: 10 Energy: 100
+Name: Intern 2 WR: 18 Energy: 100
+Name: Intern 3 WR: 15 Energy: 100
+Name: Intern 4 WR: 11 Energy: 100
+Name: Intern 5 WR: 6 Energy: 100
+Name: Intern 6 WR: 2 Energy: 100
+Name: Intern 7 WR: 1 Energy: 100
+Name: Intern 8 WR: 10 Energy: 100
+Name: Intern 9 WR: 8 Energy: 100
+Name: Task 0 work: 0 of: 80
+Name: Task 1 work: 0 of: 69
+Name: Task 2 work: 0 of: 44
+Name: Task 3 work: 0 of: 67
+Name: Task 4 work: 0 of: 69
+Name: Task 5 work: 0 of: 97
+Name: Task 6 work: 0 of: 23
+Name: Task 7 work: 0 of: 49
+Name: Task 8 work: 0 of: 48
+Name: Task 9 work: 0 of: 48
+Task 9 at 37.5%
+Intern 0 Energy at: 82
+Task 9 at 58.333333333333336%
+Intern 1 Energy at: 90
+Task 9 at 95.83333333333334%
+Intern 2 Energy at: 82
+Task 9 at 100.0%
+Task 9 completed
+Task 8 at 37.5%
+Intern 0 Energy at: 64
+Task 8 at 58.333333333333336%
+Intern 1 Energy at: 80
+Task 8 at 95.83333333333334%
+Intern 2 Energy at: 64
+Task 8 at 100.0%
+Task 8 completed
+Task 7 at 36.734693877551024%
+Intern 0 Energy at: 46
+Task 7 at 57.14285714285714%
+Intern 1 Energy at: 70
+Task 7 at 93.87755102040816%
+Intern 2 Energy at: 46
+Task 7 at 100.0%
+Task 7 completed
+Task 2 at 40.909090909090914%
+Intern 0 Energy at: 28
+Task 2 at 63.63636363636363%
+Intern 1 Energy at: 60
+Task 2 at 100.0%
+Task 2 completed
+Task 3 at 26.865671641791046%
+Intern 0 Energy at: 10
+Task 3 at 41.7910447761194%
+Intern 1 Energy at: 50
+Task 3 at 68.65671641791045%
+Intern 2 Energy at: 28
+Task 3 at 91.04477611940298%
+Intern 3 Energy at: 85
+Task 3 at 100.0%
+Task 3 completed
+Task 0 at 22.5%
+Intern 0 is tired
+Task 0 at 35.0%
+Intern 1 Energy at: 40
+Task 0 at 57.49999999999999%
+Intern 2 Energy at: 10
+Task 0 at 76.25%
+Intern 3 Energy at: 70
+Task 0 at 90.0%
+Intern 4 Energy at: 89
+Task 0 at 97.5%
+Intern 5 Energy at: 94
+Task 0 at 100.0%
+Task 0 completed
+Task 5 at 18.556701030927837%
+Intern 0 is tired
+Task 5 at 28.865979381443296%
+Intern 1 Energy at: 30
+Task 5 at 47.42268041237113%
+Intern 2 is tired
+Task 5 at 62.88659793814433%
+Intern 3 Energy at: 55
+Task 5 at 74.22680412371135%
+Intern 4 Energy at: 78
+Task 5 at 80.41237113402062%
+Intern 5 Energy at: 88
+Task 5 at 82.4742268041237%
+Intern 6 Energy at: 98
+Task 5 at 83.50515463917526%
+Intern 7 Energy at: 99
+Task 5 at 93.81443298969072%
+Intern 8 Energy at: 90
+Task 5 at 100.0%
+Task 5 completed
+Task 1 at 26.08695652173913%
+Intern 0 is tired
+Task 1 at 40.57971014492754%
+Intern 1 Energy at: 20
+Task 1 at 66.66666666666666%
+Intern 2 is tired
+Task 1 at 88.40579710144928%
+Intern 3 Energy at: 40
+Task 1 at 100.0%
+Task 1 completed
+Task 4 at 26.08695652173913%
+Intern 0 is tired
+Task 4 at 40.57971014492754%
+Intern 1 Energy at: 10
+Task 4 at 66.66666666666666%
+Intern 2 is tired
+Task 4 at 88.40579710144928%
+Intern 3 Energy at: 25
+Task 4 at 100.0%
+Task 4 completed
+Task 6 at 78.26086956521739%
+Intern 0 is tired
+Task 6 at 100.0%
+Task 6 completed
+All Tasks are completed
