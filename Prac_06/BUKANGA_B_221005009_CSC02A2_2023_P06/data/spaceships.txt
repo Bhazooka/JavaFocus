@@ -1,0 +1,9 @@
+40 200 GC1 Galactic Core 
+750 200 FS1 Falling Star 
+1200 200 SS1 SSE Carbonaria 
+1000 350 PE1 Pelican 
+450 400 EE1 Earth Express 
+250 200 HM1 HMS Rhinoceros 
+200 20 SF1 Stellar Flare 
+370 450 SA1 Saratoga 
+500 450 CO1 Constellation

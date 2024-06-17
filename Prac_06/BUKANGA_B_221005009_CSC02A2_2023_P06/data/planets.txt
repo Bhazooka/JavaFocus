@@ -1,0 +1,8 @@
+Mercury Brown 750 240 50
+Venus Pink 850 270 75
+Earth Green 950 250 100
+Mars Red 670 250 65
+Ceres Gray 920 80 40
+Jupiter Brown 1070 250 175
+Saturn Yellow 110 250 150
+Uranus Blue 1300 250 125

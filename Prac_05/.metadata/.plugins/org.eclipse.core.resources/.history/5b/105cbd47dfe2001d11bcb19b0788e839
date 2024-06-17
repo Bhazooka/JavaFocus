@@ -1,0 +1,210 @@
+package  application;
+
+import java.io.File;
+
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Menu;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+
+import acsse.csc2a.model.*;
+import acsse.csc2a.file.*;
+
+
+public class ShipPane extends StackPane{
+
+	//Variables
+	MenuBar main_Menu = new MenuBar();
+    Menu File = new Menu("File");
+	FileChooser fc = new FileChooser();
+	MenuItem Select = new MenuItem("Open File");
+	Ship ship = null;
+	VBox vBox = new VBox();
+	//Constructor
+	public ShipPane(Stage primaryStage) {
+		super();
+		main_Menu.getMenus().add(File);
+		File.getItems().add(Select);
+		this.getChildren().add(0,main_Menu);
+		StackPane.setAlignment(main_Menu,Pos.TOP_LEFT);
+		
+		Select.setOnAction(new EventHandler<ActionEvent>(){
+			@Override
+			public void handle(ActionEvent event)
+			{
+				fc.setTitle("Choose a file");
+				fc.setInitialFileName("data");
+				File file = fc.showOpenDialog(primaryStage);
+				
+				if(file !=null)
+				{
+					ship = DataReader.readShipFile(file);
+					CreateTitledPane(ship);				
+				}
+			}
+		});
+	}
+
+	//Methods
+	private void CreateTitledPane(Ship ship)
+	{
+		TitledPane tPane = new TitledPane();
+		tPane.setText("Ship Information");
+		
+		//Adding labels and TextFields
+		GridPane gPane = new GridPane();
+		
+		gPane.add(new Label("Ship ID:"), 0, 0);
+		String s= ship.getID();
+		TextField txt = new TextField();
+		txt.setText(s);
+		gPane.add(txt, 0, 1);
+		
+		gPane.add(new Label("Ship Name:"), 1, 0);
+		s = ship.getName();
+		TextField txt1 = new TextField();
+		txt1.setText(s);
+		gPane.add(txt1, 1, 1);
+		
+		tPane.setContent(gPane);
+		vBox.getChildren().add(tPane);
+		
+		//Adding message
+		vBox.getChildren().add(CreateListView(ship));
+		
+		//Adding the vBox to the StackPane
+		this.getChildren().add(vBox);
+		StackPane.setAlignment(vBox,Pos.TOP_LEFT);
+	}
+	
+	private VBox CreateListView(Ship ship)
+	{
+		VBox box = new VBox();
+		VBox vbox1 = new VBox();
+		VBox vbox2 = new VBox();
+		VBox vbox3 = new VBox();
+		TitledPane tPane1 = new TitledPane();
+		tPane1.setText("SOS Message");
+		TitledPane tPane2 = new TitledPane();
+		tPane2.setText("Encrypted Message");
+		TitledPane tPane3 = new TitledPane();
+		tPane3.setText("Normal Message");
+		ListView<TitledPane> list = new ListView<>();
+		int Counter = 0;
+		
+		for(Message m : ship.getMessages())
+		{
+			
+			String s = "";
+			GridPane gridPane = new GridPane();
+			
+			if(m instanceof SOSMessage)
+			{
+				SOSMessage message = (SOSMessage) m;
+				gridPane.add(new Label("ID:"), 0, Counter);
+				s = message.getID();
+				gridPane.add(new TextField(s), 1, Counter);
+				gridPane.add(new Label("Source:"), 2, Counter);
+				s = message.getPlanet_source().toString();
+				gridPane.add(new TextField(s), 3, Counter);
+				
+				gridPane.add(new Label("Type:"), 0, Counter + 1);
+				gridPane.add(new TextField("SOSMessage"), 1, Counter + 1);
+				gridPane.add(new Label("Destination:"), 2, Counter + 1);
+				s = message.getPlanet_destination().toString();
+				gridPane.add(new TextField(s), 3, Counter + 1);
+				
+				gridPane.add(new Label("Contents:"), 0, Counter + 2);
+				s = message.getContents();
+				TextField t = new TextField(s);
+				t.setPrefWidth(300);
+				gridPane.add(t, 1, Counter + 2);
+				vbox1.getChildren().add(gridPane);
+				
+			}else if(m instanceof EncryptedMessage)
+			{
+				EncryptedMessage message = (EncryptedMessage) m;
+				gridPane.add(new Label("ID:"), 0, Counter);
+				s = message.getID();
+				gridPane.add(new TextField(s), 1, Counter);
+				gridPane.add(new Label("Source:"), 2, Counter);
+				s = message.getPlanet_source().toString();
+				gridPane.add(new TextField(s), 3, Counter);
+				
+				gridPane.add(new Label("Type:"), 0, Counter + 1);
+				gridPane.add(new TextField("EncryptedMessage"), 1, Counter + 1);
+				gridPane.add(new Label("Destination:"), 2, Counter + 1);
+				s = message.getPlanet_destination().toString();
+				gridPane.add(new TextField(s), 3, Counter + 1);
+				
+				gridPane.add(new Label("Contents:"), 0, Counter + 2);
+				s = message.getContents();
+				TextField t = new TextField(s);
+				t.setPrefWidth(300);
+				gridPane.add(t, 1, Counter + 2);
+				vbox2.getChildren().add(gridPane);
+			}else if(m instanceof NormalMessage)
+			{
+				NormalMessage message = (NormalMessage) m;
+				gridPane.add(new Label("ID:"), 0, Counter);
+				s = message.getID();
+				gridPane.add(new TextField(s), 1, Counter);
+				gridPane.add(new Label("Source:"), 2, Counter);
+				s = message.getPlanet_source().toString();
+				gridPane.add(new TextField(s), 3, Counter);
+				
+				gridPane.add(new Label("Type:"), 0, Counter + 1);
+				gridPane.add(new TextField("NormalMessage"), 1, Counter + 1);
+				gridPane.add(new Label("Destination:"), 2, Counter + 1);
+				s = message.getPlanet_destination().toString();
+				gridPane.add(new TextField(s), 3, Counter + 1);
+				
+				gridPane.add(new Label("Contents:"), 0, Counter + 2);
+				s = message.getContents();
+				TextField t = new TextField(s);
+				t.setPrefWidth(300);
+				gridPane.add(t, 1, Counter + 2);
+				vbox3.getChildren().add(gridPane);
+			}
+			
+			
+			
+//			if(m instanceof SOSMessage)
+//			{
+//				tPane1.setContent(list);				
+//			}else if(m instanceof EncryptedMessage)
+//			{
+//				tPane2.setContent(list);
+//			}else if(m instanceof NormalMessage)
+//			{
+//				tPane3.setContent(list);;
+//			}
+			Counter++;
+		} // end of loop
+		tPane1.setContent(vbox1);
+		tPane2.setContent(vbox2);
+		tPane3.setContent(vbox3);
+		list.getItems().addAll(tPane1,tPane2,tPane3);
+		box.getChildren().add(list);
+		return box;
+		
+	}
+
+	/**
+	 * @return the ship
+	 */
+	public Ship getShip() {
+		return ship;
+	}
+}

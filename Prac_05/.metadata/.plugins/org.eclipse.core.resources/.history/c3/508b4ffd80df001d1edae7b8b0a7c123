@@ -1,0 +1,63 @@
+package application;
+
+
+import java.io.File;
+
+import acsse.csc2a.file.DataReader;
+import acsse.csc2a.model.Ship;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TitledPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+
+public class ShipPane extends StackPane {
+	
+	private Ship ship = null;
+	private MenuBar menuBar = null;
+	
+	public ShipPane() {
+		menuBar = new MenuBar();	
+		Menu fileMenu = new Menu("File");	
+		MenuItem menuItem = new MenuItem("Open");
+		
+		fileMenu.getItems().add(menuItem);
+		menuBar.getMenus().add(fileMenu);
+		
+		menuItem.setOnAction(e -> {
+			final FileChooser filechoice = new FileChooser();
+			filechoice.setTitle("Select File");
+			filechoice.setInitialDirectory(new File("data"));
+			File file = filechoice.showOpenDialog(null);
+			
+			
+			if(file != null) {
+				ship = DataReader.readShipFile(file);
+				//createChildren();
+			}
+
+		});
+		
+		//layout controls
+		VBox layout = new VBox(); //VBox object that contains the menu bar options
+		layout.getChildren().addAll(menuBar);	//Add Menu bar to  VBox
+		this.getChildren().addAll(layout);	//Add the VBox object to the ShipPlane
+		this.setWidth(BASELINE_OFFSET_SAME_AS_HEIGHT);	//400
+		this.setHeight(BASELINE_OFFSET_SAME_AS_HEIGHT); //500	
+	}
+	
+	private void createChildren() {
+		TitledPane heading = new TitledPane();
+		heading.setText("Ship Data");	//The window title
+		//heading.setContent(createGrid(ship));
+		
+	}
+	
+	private Ship createGrid(Ship ship) {
+		
+		return null;
+	}
+
+}

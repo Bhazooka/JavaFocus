@@ -1,0 +1,35 @@
+package accse.csc2a.file;
+
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
+import acsse.csc2a.model.*;
+
+public class DataReader {
+	
+	public Ship readShip(File shipFile, File messageFile)
+	{
+		DataInputStream input = null;
+		Ship ship = null;
+		
+		try {
+			input = new DataInputStream(new BufferedInputStream(new FileInputStream(shipFile)));
+			
+			String SHIP_ID = input.readUTF();
+			String SHIP_NAME = input.readUTF();
+			ship = new Ship(SHIP_ID, SHIP_NAME);
+			
+			
+		}
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		
+		return ship;
+	}
+
+}

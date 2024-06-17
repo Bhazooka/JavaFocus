@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<launchConfiguration type="org.eclipse.jdt.launching.localJavaApplication">
+    <booleanAttribute key="org.eclipse.debug.core.ATTR_FORCE_SYSTEM_CONSOLE_ENCODING" value="false"/>
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_PATHS">
+        <listEntry value="/BUKANGA_B_221005009_CSC02A2_2023_P05"/>
+    </listAttribute>
+    <listAttribute key="org.eclipse.debug.core.MAPPED_RESOURCE_TYPES">
+        <listEntry value="4"/>
+    </listAttribute>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_ATTR_USE_ARGFILE" value="false"/>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_SHOW_CODEDETAILS_IN_EXCEPTION_MESSAGES" value="true"/>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_CLASSPATH_ONLY_JAR" value="false"/>
+    <booleanAttribute key="org.eclipse.jdt.launching.ATTR_USE_START_ON_FIRST_THREAD" value="true"/>
+    <listAttribute key="org.eclipse.jdt.launching.CLASSPATH">
+        <listEntry value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;runtimeClasspathEntry path=&quot;5&quot; projectName=&quot;BUKANGA_B_221005009_CSC02A2_2023_P05&quot; type=&quot;1&quot;/&gt;&#13;&#10;"/>
+        <listEntry value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot; standalone=&quot;no&quot;?&gt;&#13;&#10;&lt;runtimeClasspathEntry containerPath=&quot;org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-17&quot; path=&quot;5&quot; type=&quot;4&quot;/&gt;&#13;&#10;"/>
+    </listAttribute>
+    <booleanAttribute key="org.eclipse.jdt.launching.DEFAULT_CLASSPATH" value="false"/>
+    <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value=""/>
+    <listAttribute key="org.eclipse.jdt.launching.MODULEPATH"/>
+    <stringAttribute key="org.eclipse.jdt.launching.MODULE_NAME" value="BUKANGA_B_221005009_CSC02A2_2023_P05"/>
+    <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="BUKANGA_B_221005009_CSC02A2_2023_P05"/>
+    <stringAttribute key="org.eclipse.jdt.launching.VM_ARGUMENTS" value="--module-path &quot;C:\Program Files\JavaFX\javafx-sdk-20\lib&quot; --add-modules javafx.controls,javafx.fxml"/>
+</launchConfiguration>

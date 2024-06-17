@@ -1,0 +1,16 @@
+INDEX VERSION 1.131+C:\Users\barbu\Desktop\2A\CSC02A2\Practicals\Prac_05\.metadata\.plugins\org.eclipse.jdt.core
+288195109.index
+2597071597.index
+1865797976.index
+3624729744.index
+120498070.index
+3413725848.index
+1240137259.index
+1372528583.index
+2709919620.index
+4139288826.index
+2985913780.index
+332383186.index
+2063136198.index
+418866905.index
+2991633832.index

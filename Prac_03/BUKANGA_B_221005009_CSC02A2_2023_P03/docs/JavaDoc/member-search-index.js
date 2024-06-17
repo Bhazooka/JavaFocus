@@ -1,0 +1,1 @@
+memberSearchIndex = [{"p":"acsse.csc2a.file","c":"FileHandler","l":"FileHandler()","u":"%3Cinit%3E()"},{"p":"acsse.csc2a.file","c":"FileHandler","l":"readShips(File)","u":"readShips(java.io.File)"}];updateSearchResults();

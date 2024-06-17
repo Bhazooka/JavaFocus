@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"acsse.csc2a","l":"Message"},{"p":"acsse.csc2a","l":"Message.PLANETS"},{"p":"acsse.csc2a","l":"Ships"}];updateSearchResults();

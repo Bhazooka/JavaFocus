@@ -1,0 +1,5 @@
+package accse.csc2a.model;
+
+public class Employee {
+
+}

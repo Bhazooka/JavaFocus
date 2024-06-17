@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="acsse.csc2a.model.Message"/>
+    <fullyQualifiedTypeName name="acsse.csc2a.model.IValidation"/>
+    <fullyQualifiedTypeName name="javax.swing.text.AbstractDocument.Content"/>
+    <fullyQualifiedTypeName name="java.io.File"/>
+    <fullyQualifiedTypeName name="java.io.DataInputStream"/>
+    <fullyQualifiedTypeName name="java.io.BufferedInputStream"/>
+    <fullyQualifiedTypeName name="java.io.FileInputStream"/>
+    <fullyQualifiedTypeName name="acsse.csc2a.model.Ship"/>
+    <fullyQualifiedTypeName name="java.lang.management.ThreadMXBean"/>
+    <fullyQualifiedTypeName name="accse.csc2a.model.SOSMessage"/>
+    <fullyQualifiedTypeName name="accse.csc2a.model.EncryptedMessage"/>
+    <fullyQualifiedTypeName name="accse.csc2a.model.NormalMessage"/>
+    <fullyQualifiedTypeName name="java.io.FileNotFoundException"/>
+    <fullyQualifiedTypeName name="java.io.IOException"/>
+</qualifiedTypeNameHistroy>

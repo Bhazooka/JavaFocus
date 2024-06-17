@@ -1,0 +1,19 @@
+package application;
+
+
+import acsse.csc2a.model.Ship;
+import javafx.scene.control.MenuBar;
+import javafx.scene.layout.StackPane;
+
+public class ShipPane extends StackPane {
+	
+	private Ship ship = null;
+	private MenuBar menuBar = null;
+	
+	public ShipPane() {
+		menuBar = new MenuBar();
+		
+		
+	}
+
+}

@@ -1,0 +1,126 @@
+package application;
+
+
+import java.io.File;
+
+import acsse.csc2a.file.DataReader;
+import acsse.csc2a.model.Message;
+import acsse.csc2a.model.Ship;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+
+public class ShipPane extends StackPane {
+	
+	private Ship ship = null;
+	private MenuBar menuBar = null;
+	
+	public ShipPane() {
+		menuBar = new MenuBar();	
+		Menu fileMenu = new Menu("File");	
+		MenuItem menuItem = new MenuItem("Open");
+		
+		fileMenu.getItems().add(menuItem);
+		menuBar.getMenus().add(fileMenu);
+		
+		menuItem.setOnAction(e -> {
+			final FileChooser filechoice = new FileChooser();
+			filechoice.setTitle("Select File");
+			filechoice.setInitialDirectory(new File("data"));
+			File file = filechoice.showOpenDialog(null);
+			
+			
+			if(file != null) {
+				ship = DataReader.readShipFile(file);
+				createChildren();
+			}
+
+		});
+		
+		//layout controls
+		VBox layout = new VBox(); //VBox object that contains the menu bar options
+		layout.getChildren().addAll(menuBar);	//Add Menu bar to  VBox
+		this.getChildren().addAll(layout);	//Add the VBox object to the ShipPlane
+		this.setWidth(400);	//400
+		this.setHeight(500); //500	
+	}
+	
+	private void createChildren() {
+		TitledPane headingShip = new TitledPane();
+		headingShip.setText("Ship Information");	//The plane title
+		headingShip.setContent(createShipGrid(ship));
+		// no need for ScrollPane scrollShip = new ScrollPane();
+		VBox vbShips = new VBox();
+		
+		//
+		//for (Ship s : ship)
+		//{
+			vbShips.getChildren().add(createShipGrid(ship));
+		//}
+		//
+		
+		//add a grid plane
+		TitledPane headingMessage = new TitledPane();
+		headingMessage.setText("Message");
+		//set content######################
+		ScrollPane scrollMessages = new ScrollPane();
+		
+	}
+	
+	private GridPane createShipGrid(Ship ship) {
+		
+		GridPane grid = new GridPane();
+		grid.setVgap(5);
+		grid.setHgap(5);
+		grid.setPadding(new Insets(5,5,5,5)); 
+		
+		grid.add(new Label("Ship ID"), 0, 0);
+		grid.add(new TextField(ship.getID()),0,1);
+		
+		
+		grid.add(new TextField("Ship Name"), 1, 0);
+		grid.add(new TextField(ship.getName()), 1, 1);
+		
+		return grid;
+	}
+	
+	private GridPane createSOSMessageGrid(Message message) {
+		
+		GridPane grid = new GridPane();
+		
+		
+		return grid;
+	}
+	
+	private GridPane createEncryptedMessageGrid(Message message) {
+		
+		GridPane grid = new GridPane();
+		
+		
+		return grid;
+	}
+	
+	private GridPane createNormalMessageGrid(Message message) {
+		
+		GridPane grid = new GridPane();
+		grid.setVgap(BASELINE_OFFSET_SAME_AS_HEIGHT);
+		grid.setPadding(new Insets(5,5,5,5)); 
+		
+		grid.add(new Label("Message ID: "), 0, 0);
+		//grid.add(new TextField());
+		
+		return grid;
+	}
+	
+	
+
+}

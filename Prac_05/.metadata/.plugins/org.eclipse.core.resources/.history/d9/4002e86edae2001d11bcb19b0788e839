@@ -1,0 +1,233 @@
+package application;
+
+
+import java.io.File;
+
+import acsse.csc2a.file.DataReader;
+import acsse.csc2a.gui.ProgressBar;
+import acsse.csc2a.model.EncryptedMessage;
+import acsse.csc2a.model.GasGiant;
+import acsse.csc2a.model.IceGiant;
+import acsse.csc2a.model.MESSAGE_TYPE;
+import acsse.csc2a.model.Message;
+import acsse.csc2a.model.NormalMessage;
+import acsse.csc2a.model.PLANET_TYPE;
+import acsse.csc2a.model.SOSMessage;
+import acsse.csc2a.model.Ship;
+import acsse.csc2a.model.Terrestrial;
+import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+
+public class ShipPane extends StackPane {
+	
+	private Ship ship = null;
+	private MenuBar menuBar = null;
+	private Message msg = null;
+	
+	public ShipPane() {
+		menuBar = new MenuBar();	
+		Menu fileMenu = new Menu("File");	
+		MenuItem menuItem = new MenuItem("Open");
+		
+		fileMenu.getItems().add(menuItem);
+		menuBar.getMenus().add(fileMenu);
+		
+		menuItem.setOnAction(e -> {
+			final FileChooser filechoice = new FileChooser();
+			filechoice.setTitle("Select File");
+			filechoice.setInitialDirectory(new File("data"));
+			File file = filechoice.showOpenDialog(null);
+			
+			
+			
+			if(file != null) {
+				ship = DataReader.readShipFile(file);
+				for(Message msg: ship.getMessages())
+				{
+					System.out.println(msg);
+				}
+				createChildren();
+				
+			}
+
+		});
+		
+		//layout controls
+		VBox layout = new VBox(); //VBox object that contains the menu bar options
+		layout.getChildren().addAll(menuBar);	//Add Menu bar to  VBox
+		this.getChildren().addAll(layout);	//Add the VBox object to the ShipPlane
+		this.setWidth(400);	//400
+		this.setHeight(500); //500	
+	}
+	
+	private void createChildren() {
+		TitledPane headingShip = new TitledPane();
+		headingShip.setText("Ship Information");	//The plane title
+		headingShip.setContent(createShipGrid(ship, msg));
+		
+		//add a grid plane
+		TitledPane headingMessage = new TitledPane();
+		headingMessage.setText("Message");
+		
+		ScrollPane scrollShip = new ScrollPane();
+		VBox vbShips = new VBox();
+		
+		vbShips.getChildren().add(createShipGrid(ship, msg));
+		for(Message msg: ship.getMessages())
+		{
+			
+			vbShips.getChildren().add(createShipGrid(ship,msg));
+
+			vbShips.getChildren().add(createShipGrid(ship,msg));
+			
+			vbShips.getChildren().add(createShipGrid(ship,msg));
+		}
+		
+
+		
+		
+		ListView<TitledPane> listView = new ListView<>();
+		listView.getItems().add(headingShip);
+		listView.getItems().add(headingMessage);
+		
+		
+		this.getChildren().clear();
+		this.getChildren().add(listView);
+		this.getChildren().add(vbShips);
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	private GridPane createShipGrid(Ship ship, Message msg) {
+		GridPane grid = new GridPane();
+		// Adding vertical and horizontal spacing.
+		grid.setVgap(4);
+		grid.setHgap(50);
+		grid.setPadding(new Insets(5, 5, 5, 5)); // Adding padding.
+		// Displaying the Exoplanet ID.
+		grid.add(new Label("ID: "), 0, 0);
+		grid.add(new TextField(ship.getID()), 1, 0);
+		// Displaying the Exoplanet Name.
+		grid.add(new Label("Name: "), 0, 1);
+		grid.add(new TextField(ship.getName()), 1, 1);
+		// Displaying the Exoplanet Category.
+		grid.add(new Label("Exoplanet Type: "), 0, 2);
+		String type = "";
+		// Determining the Exoplanet type from its instance.
+		if (msg instanceof SOSMessage)
+			type = "SOSMessage";
+		if (msg instanceof EncryptedMessage)
+			type = "EncryptedMessage";
+		if (msg instanceof NormalMessage)
+			type = "NormalMessage";
+		// Displaying the Exoplanet type.
+		grid.add(new TextField(type), 1, 2);
+		// Displaying the Exoplanet's USI using a ProgressBar.
+		grid.add(new Label("USI: "), 0, 5);
+		
+
+		return grid;
+	}
+	
+	private GridPane createSOSMessageGrid(SOSMessage message) {
+		
+		GridPane grid = new GridPane();
+		
+		grid.add(new Label("ID: "), 0, 0);
+		grid.add(new TextField(message.getID()),0,0);
+		
+		
+		grid.add(new Label("Type"), 0, 0);
+		String MessageType = "";
+		if(message instanceof SOSMessage)
+		{
+			MessageType = "SOS Message";
+		}
+		grid.add(new TextField(MessageType),0,0);
+		
+		
+		grid.add(new Label("Destination: "), 0, 0);
+		//grid.add(new TextField(PLANET_TYPE.valueOf(MessageType)),0,0);
+		
+		grid.add(new Label("Source: "), 0, 0);
+		//grid.add(new TextField(PLANET_TYPE.valueOf(MessageType)),0,0);
+		
+		return grid;
+	}
+	
+	
+	
+	private GridPane createEncryptedMessageGrid(EncryptedMessage message) {
+		
+		GridPane grid = new GridPane();
+		
+		grid.add(new Label("ID: "), 0, 0);
+		grid.add(new TextField(message.getID()),0,0);
+		
+		
+		grid.add(new Label("Type"), 0, 0);
+		String MessageType = "";
+		if(message instanceof EncryptedMessage)
+		{
+			MessageType = "Encrypted Message";
+		}
+		grid.add(new TextField(MessageType),0,0);
+		
+		
+		
+		grid.add(new Label("Destination: "), 0, 0);
+		//grid.add(new TextField(PLANET_TYPE.valueOf(MessageType)),0,0);
+		
+		grid.add(new Label("Source: "), 0, 0);
+		//grid.add(new TextField(PLANET_TYPE.valueOf(MessageType)),0,0);
+		
+		return grid;
+	}
+	
+
+	private GridPane createNormalMessageGrid(NormalMessage message) {
+		
+		GridPane grid = new GridPane();
+		
+		grid.add(new Label("ID: "), 0, 0);
+		grid.add(new TextField(message.getID()),0,0);
+		
+		
+		grid.add(new Label("Type"), 0, 0);
+		String MessageType = "";
+		if(message instanceof NormalMessage)
+		{
+			MessageType = "Normal Message";
+		}
+		grid.add(new TextField(MessageType),0,0);
+		
+		grid.add(new Label("ID: "), 0, 0);
+		grid.add(new TextField(message.getID()),0,0);
+		
+		grid.add(new Label("Destination: "), 0, 0);
+		//grid.add(new TextField(PLANET_TYPE.valueOf(MessageType)),0,0);
+		
+		grid.add(new Label("Source: "), 0, 0);
+		//grid.add(new TextField(PLANET_TYPE.valueOf(MessageType)),0,0);
+		
+		return grid;
+	}
+
+}
