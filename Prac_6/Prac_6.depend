@@ -1,0 +1,33 @@
+# depslib dependency file v1.0
+1662627578 source:c:\users\barbu\desktop\csc01b1\prac_6\main.cpp
+	"Matrix2D.h"
+	<iostream>
+	<string>
+	<cstdlib>
+
+1662627525 c:\users\barbu\desktop\csc01b1\prac_6\matrix2d.h
+	<string>
+
+1662627586 source:c:\users\barbu\desktop\csc01b1\prac_6\matrix2d.cpp
+	"Matrix2D.h"
+	<cassert>
+	<iostream>
+	<sstream>
+	<string>
+
+1662766061 source:c:\users\barbu\desktop\csc01b1\practicals\prac_6\main.cpp
+	"Matrix2D.h"
+	<iostream>
+	<string>
+	<cstdlib>
+
+1662803077 c:\users\barbu\desktop\csc01b1\practicals\prac_6\matrix2d.h
+	<string>
+
+1662803077 source:c:\users\barbu\desktop\csc01b1\practicals\prac_6\matrix2d.cpp
+	"Matrix2D.h"
+	<cassert>
+	<iostream>
+	<sstream>
+	<string>
+

@@ -1,0 +1,45 @@
+# depslib dependency file v1.0
+1660254907 source:c:\users\barbu\desktop\csc01b1\prac_3\main.cpp
+	<iostream>
+	"Canvas2D.h"
+
+1660254837 c:\users\barbu\desktop\csc01b1\prac_3\canvas2d.h
+	<cstdlib>
+	<string>
+	"CanvasCapper.h"
+
+1660254898 source:c:\users\barbu\desktop\csc01b1\prac_3\canvas2d.cpp
+	"Canvas2D.h"
+	<cstdlib>
+	<sstream>
+	<cmath>
+	<string>
+
+1660254837 source:c:\users\barbu\desktop\csc01b1\prac_3\canvascapper.cpp
+	"CanvasCapper.h"
+	<cstdlib>
+
+1660254989 c:\users\barbu\desktop\csc01b1\prac_3\canvascapper.h
+
+1660297465 source:c:\users\barbu\desktop\csc01b1\prac projects (sem 2)\prac_3\canvas2d.cpp
+	"Canvas2D.h"
+	<cstdlib>
+	<sstream>
+	<cmath>
+	<string>
+
+1660254837 c:\users\barbu\desktop\csc01b1\prac projects (sem 2)\prac_3\canvas2d.h
+	<cstdlib>
+	<string>
+	"CanvasCapper.h"
+
+1660255244 c:\users\barbu\desktop\csc01b1\prac projects (sem 2)\prac_3\canvascapper.h
+
+1660255244 source:c:\users\barbu\desktop\csc01b1\prac projects (sem 2)\prac_3\canvascapper.cpp
+	"CanvasCapper.h"
+	<cstdlib>
+
+1660255244 source:c:\users\barbu\desktop\csc01b1\prac projects (sem 2)\prac_3\main.cpp
+	<iostream>
+	"Canvas2D.h"
+

@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1659647416 source:c:\users\barbu\desktop\csc01b1\prac_2\main.cpp
+	<iostream>
+	"Canvas2D.h"
+
+1659646624 c:\users\barbu\desktop\csc01b1\prac_2\canvas2d.h
+	<iostream>
+
+1659646730 source:c:\users\barbu\desktop\csc01b1\prac_2\canvas2d.cpp
+	"Canvas2D.h"
+	<sstream>
+	<cmath>
+

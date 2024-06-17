@@ -1,0 +1,47 @@
+# depslib dependency file v1.0
+1665930961 source:c:\users\barbu\desktop\csc01b1\practicals\st2 paper a 2022\main.cpp
+	"UJImage.h"
+	<fstream>
+
+1665927994 source:c:\users\barbu\desktop\csc01b1\practicals\st2 paper a 2022\ujimage.cpp
+	"UJImage.h"
+	<sstream>
+	<fstream>
+	<iostream>
+
+1665927815 c:\users\barbu\desktop\csc01b1\practicals\st2 paper a 2022\ujimage.h
+	<iostream>
+	<sstream>
+	<cstdlib>
+	<vector>
+	<cmath>
+	<cstring>
+	<random>
+
+1665931064 source:c:\users\barbu\desktop\csc01b1\practicals\st2 paper a 2022\continuousrenderer.cpp
+	"ContinuousRenderer.h"
+	"UJImage.h"
+
+1665931044 c:\users\barbu\desktop\csc01b1\practicals\st2 paper a 2022\continuousrenderer.h
+	<cassert>
+	"Render.h"
+	"UJImage.h"
+
+1665931064 c:\users\barbu\desktop\csc01b1\practicals\st2 paper a 2022\render.h
+	"UJImage.h"
+
+1665932362 source:c:\users\barbu\desktop\csc01b1\practicals\st2 paper a 2022\stochasticrenderer.cpp
+	"StochasticRenderer.h"
+	"UJImage.h"
+
+1665930209 c:\users\barbu\desktop\csc01b1\practicals\st2 paper a 2022\stochasticrenderer.h
+	"UJImage.h"
+	"Render.h"
+
+1665940261 source:c:\users\barbu\desktop\csc01b1\practicals\st2 paper a 2022\exception.cpp
+	"Exception.h"
+
+1665930736 c:\users\barbu\desktop\csc01b1\practicals\st2 paper a 2022\exception.h
+	<iostream>
+	<string>
+

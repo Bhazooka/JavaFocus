@@ -1,0 +1,165 @@
+#include <cstdlib>
+#include <iostream>
+
+using namespace std;
+
+template <typename T>
+GenericStorage2D<T>::GenericStorage2D()
+{
+    reDim(DEFAULT_ROWS, DEFAULT_COLS);
+}
+
+template <typename T>
+GenericStorage2D<T>::GenericStorage2D(int intRows, int intCols)
+{
+    reDim(intRows, intCols);
+}
+
+
+template <typename T>
+GenericStorage2D<T>::GenericStorage2D(const GenericStorage2D<T>& objOrig)
+{
+    Dealloc();
+    reDim(objOrig._rows, objOrig._cols);
+
+}
+
+template <typename T>
+int GenericStorage2D<T>::getRows() const
+{
+    return _rows;
+}
+
+template <typename T>
+int GenericStorage2D<T>::getCols() const
+{
+    return _cols;
+}
+
+
+template <typename T>
+GenericStorage2D<T>& GenericStorage2D<T>::operator=(GenericStorage2D<T>& objRHS)
+{
+    if(this != &objRHS)
+    {
+        Dealloc();
+        reDim(objRHS._rows, objRHS._cols);
+        copyState(objRHS);
+    }
+
+    return *this;
+}
+
+
+template <typename T>
+bool GenericStorage2D<T>::operator==(const GenericStorage2D<T>& objRHS)
+{
+    if(_rows != objRHS._rows)
+        return false;
+    if(_cols != objRHS._cols)
+        return false;
+
+    for(int r = 0; r < _rows; r++)
+    {
+        for(int c = 0; c < _cols; c++)
+        {
+            if(_info[r] != objRHS._info[r])
+            {
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+
+template <typename T>
+bool GenericStorage2D<T>::operator!=(const GenericStorage2D<T>& objRHS)
+{
+    return !(*this == objRHS);
+}
+
+template <typename T>
+Row<T>& GenericStorage2D<T>::operator[](int intIndex)
+{
+    enforceRange(intIndex, 0, _rows - 1);
+    return (*_info[intIndex]);
+}
+
+template <typename T1>
+std::ostream& operator<<(std::ostream& sLHS, GenericStorage2D<T1>& objRHS)
+{
+    for(int r = 0; r < objRHS._rows; r++)
+    {
+        for(int c = 0; c < objRHS._cols; c++)
+        {
+            sLHS << objRHS[r][c] << ' ';
+        }
+        sLHS << endl;
+    }
+
+    return sLHS;
+}
+
+template <typename T1>
+std::istream& operator>>(std::istream& sLHS, GenericStorage2D<T1>& objRHS)
+{
+    int intRows = 0;
+    sLHS >> intRows;
+    int intCols = 0;
+    sLHS >> intCols;
+    objRHS.Dealloc();
+    objRHS.reDim(intRows, intCols);
+    for(int r = 0; r < objRHS.getRows(); r++)
+    {
+        for(int c = 0; c < objRHS.getCols(); c++)
+        {
+            sLHS >> objRHS[r][c];
+        }
+    }
+    return sLHS;
+}
+
+template <typename T>
+GenericStorage2D<T>::~GenericStorage2D()
+{
+    Dealloc();
+}
+
+template <typename T>
+void GenericStorage2D<T>::enforceRange(int intValue, int intMin, int intMax) const
+{
+    if(intValue < intMin || intValue > intMax)
+    {
+        cerr << "Value (" << intValue << ") out of range"
+             << "[" << intMin << ", " << intMax << "]" <<endl;
+        exit(ERROR_GenericStorage2D_RANGE);
+    }
+}
+
+template <typename T>
+void GenericStorage2D<T>::copyState(GenericStorage2D<T>& objOrig)
+{
+    for(int r = 0; r < _rows; r++)
+        (*this)[r] = objOrig[r];
+}
+
+template <typename T>
+void GenericStorage2D<T>::Dealloc()
+{
+    for(int r = 0; r < _rows; r++)
+        delete _info[r];
+    delete [] _info;
+}
+
+template <typename T>
+void GenericStorage2D<T>::reDim(int intRows, int intCols)
+{
+    enforceRange(intRows, 1, MAX_ROWS);
+    enforceRange(intCols, 1, MAX_COLS);
+    _rows = intRows;
+    _cols = intCols;
+    _info = new Row<T>*[_rows];
+    for(int r = 0; r < _rows; r++)
+        _info[r] = new Row<T>(_cols);
+}

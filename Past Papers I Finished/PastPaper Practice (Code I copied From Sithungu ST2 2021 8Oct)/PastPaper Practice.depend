@@ -1,0 +1,39 @@
+# depslib dependency file v1.0
+1665766387 source:c:\users\barbu\desktop\csc01b1\practicals\pastpaper practice\battlegroundanalyser.cpp
+	"BattleGroundAnalyser.h"
+	"VotingGrid.h"
+	<cmath>
+	<iostream>
+	<sstream>
+
+1665766948 c:\users\barbu\desktop\csc01b1\practicals\pastpaper practice\battlegroundanalyser.h
+	"VotingAnalyser.h"
+
+1665766387 c:\users\barbu\desktop\csc01b1\practicals\pastpaper practice\votinganalyser.h
+	<string>
+
+1665766387 c:\users\barbu\desktop\csc01b1\practicals\pastpaper practice\votinggrid.h
+	<string>
+	<vector>
+
+1665766387 source:c:\users\barbu\desktop\csc01b1\practicals\pastpaper practice\main.cpp
+	<iostream>
+	"VotingGrid.h"
+
+1665766387 source:c:\users\barbu\desktop\csc01b1\practicals\pastpaper practice\potentialfraudanalyser.cpp
+	"VotingGrid.h"
+	"PotentialFraudAnalyser.h"
+	<cmath>
+	<sstream>
+
+1665767148 c:\users\barbu\desktop\csc01b1\practicals\pastpaper practice\potentialfraudanalyser.h
+	"VotingAnalyser.h"
+
+1665766387 source:c:\users\barbu\desktop\csc01b1\practicals\pastpaper practice\predictedoutcomeanalyser.cpp
+	"PredictedOutcomeAnalyser.h"
+	"VotingGrid.h"
+	<sstream>
+
+1665766948 c:\users\barbu\desktop\csc01b1\practicals\pastpaper practice\predictedoutcomeanalyser.h
+	"VotingAnalyser.h"
+

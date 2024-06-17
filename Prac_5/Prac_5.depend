@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1662066579 source:c:\users\barbu\desktop\csc01b1\2_prac projects (sem 2)\prac_5\main.cpp
+	<iostream>
+	"Matrix.h"
+
+1662066729 c:\users\barbu\desktop\csc01b1\2_prac projects (sem 2)\prac_5\matrix.h
+	<sstream>
+	<iostream>
+	<cstdlib>
+
+1662066153 source:c:\users\barbu\desktop\csc01b1\2_prac projects (sem 2)\prac_5\matrix.cpp
+	"Matrix.h"
+	<string>
+	<sstream>
+

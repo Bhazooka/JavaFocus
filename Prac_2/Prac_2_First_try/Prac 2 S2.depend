@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1659633626 source:c:\users\barbu\desktop\csc01b1\prac projects (sem 2)\prac_2\main.cpp
+	<iostream>
+	"Canvas2D.h"
+
+1659535562 source:c:\users\barbu\desktop\csc01b1\prac projects (sem 2)\prac_2\face.cpp
+	"Face.h"
+	<cstdlib>
+
+1659534344 c:\users\barbu\desktop\csc01b1\prac projects (sem 2)\prac_2\face.h
+
+1659634028 c:\users\barbu\desktop\csc01b1\prac projects (sem 2)\prac_2\canvas2d.h
+	<cstdlib>
+	<string>
+	"Face.h"
+
+1659634028 source:c:\users\barbu\desktop\csc01b1\prac projects (sem 2)\prac_2\canvas2d.cpp
+	"Canvas2D.h"
+	<cstdlib>
+	<sstream>
+	<cmath>
+	<string>
+

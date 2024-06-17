@@ -1,0 +1,41 @@
+# depslib dependency file v1.0
+1665952378 source:c:\users\barbu\desktop\csc01b1\practicals\2022 st2 paper a\circularplotter.cpp
+	"CircularPlotter.h"
+	<cmath>
+
+1665953905 source:c:\users\barbu\desktop\csc01b1\practicals\2022 st2 paper a\exception.cpp
+	"Exception.h"
+
+1665954220 source:c:\users\barbu\desktop\csc01b1\practicals\2022 st2 paper a\main.cpp
+	"UJImage.h"
+	<iostream>
+
+1665953477 source:c:\users\barbu\desktop\csc01b1\practicals\2022 st2 paper a\rectangularplotter.cpp
+	"RectangularPlotter.h"
+	<cmath>
+
+1665954235 source:c:\users\barbu\desktop\csc01b1\practicals\2022 st2 paper a\ujimage.cpp
+	"UJImage.h"
+
+1665954203 c:\users\barbu\desktop\csc01b1\practicals\2022 st2 paper a\ujimage.h
+	<iostream>
+	<cstdlib>
+	<sstream>
+	<string>
+	<fstream>
+	<random>
+
+1665951698 c:\users\barbu\desktop\csc01b1\practicals\2022 st2 paper a\circularplotter.h
+	"PixelPlotter.h"
+	"UJImage.h"
+
+1665954203 c:\users\barbu\desktop\csc01b1\practicals\2022 st2 paper a\pixelplotter.h
+	"UJImage.h"
+
+1665953173 c:\users\barbu\desktop\csc01b1\practicals\2022 st2 paper a\exception.h
+	<iostream>
+
+1665953456 c:\users\barbu\desktop\csc01b1\practicals\2022 st2 paper a\rectangularplotter.h
+	"UJImage.h"
+	"PixelPlotter.h"
+

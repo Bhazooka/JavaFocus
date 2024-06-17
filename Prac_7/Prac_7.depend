@@ -1,0 +1,21 @@
+# depslib dependency file v1.0
+1664289332 source:c:\users\barbu\desktop\csc01b1\practicals\prac_7\main.cpp
+	<iostream>
+	"GenericStorage2D.h"
+
+1664176377 c:\users\barbu\desktop\csc01b1\practicals\prac_7\genericstorage2d.h
+	<iostream>
+	"Row.h"
+	"GenericStorage2D.imp"
+
+1664172129 c:\users\barbu\desktop\csc01b1\practicals\prac_7\row.h
+	"Row.imp"
+
+1664176736 c:\users\barbu\desktop\csc01b1\practicals\prac_7\row.imp
+	<cstdlib>
+	<iostream>
+
+1664176752 c:\users\barbu\desktop\csc01b1\practicals\prac_7\genericstorage2d.imp
+	<cstdlib>
+	<iostream>
+

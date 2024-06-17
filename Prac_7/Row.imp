@@ -1,0 +1,75 @@
+#include <cstdlib>
+#include <iostream>
+
+using namespace std;
+
+template <typename T>
+Row<T>::Row()
+{
+    reDim(DEFAULT_COLS);
+}
+
+template <typename T>
+Row<T>::Row(int intLength)
+{
+    reDim(intLength);
+}
+
+template <typename T>
+Row<T>::Row(const Row<T>& objOrig)
+{
+    reDim(objOrig._length);
+    for(int i = 0; i < _length; i++)
+        _info[i] = objOrig._info[i];
+}
+
+template <typename T>
+Row<T>& Row<T>::operator=(const Row<T>& objRHS)
+{
+    if(this != &objRHS)
+    {
+        delete [] _info;
+        reDim(objRHS._length);
+        for(int i = 0; i < _length; i++)
+            _info[i] = objRHS._info[i];
+    }
+
+    return *this;
+}
+
+
+template <typename T>
+T& Row<T>::operator[](int intIndex)
+{
+    if(intIndex < 0 || intIndex > MAX_COLS)
+    {
+        cerr << "Invalid index for row " << intIndex << endl;
+        exit(ERROR_ROW_INDEX);
+    }
+
+    return _info[intIndex];
+}
+
+template <typename T>
+int Row<T>::getLength() const
+{
+    return _length;
+}
+
+template <typename T>
+Row<T>::~Row()
+{
+    delete [] _info;
+}
+
+template <typename T>
+void Row<T>::reDim(int intLength)
+{
+    if(intLength <= 0)
+    {
+         cerr << "Row length <= 0" << endl;
+         exit(ERROR_ROW_LENGTH);
+    }
+    _length = intLength;
+    _info = new T[_length];
+}

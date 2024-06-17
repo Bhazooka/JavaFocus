@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1660049058 source:c:\users\barbu\desktop\csc01b1\practice\main.cpp
+	<iostream>
+	<iomanip>
+
+1664990506 source:c:\users\barbu\desktop\csc01b1\practicals\practice\main.cpp
+	<iostream>
+
+1664799472 c:\users\barbu\desktop\csc01b1\practicals\practice\practice.h
+
+1664990452 source:c:\users\barbu\desktop\csc01b1\practicals\practice\practice.cpp
+	<iostream>
+	<cstdlib>
+	<sstream>
+	<string>
+	<vector>
+
+1668350494 source:c:\users\barbu\desktop\1b\csc01b1\practicals\practice\practice.cpp
+
+1668354742 source:c:\users\barbu\desktop\1b\csc01b1\practicals\practice\main.cpp
+	<iostream>
+	<cstdlib>
+
