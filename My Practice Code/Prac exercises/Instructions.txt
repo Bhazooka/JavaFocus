@@ -1,0 +1,30 @@
+Objectives:
+Declaring function prototypes.
+Implementing functions.
+Using functions.
+
+Write a program that presents three options to the user.  The menu should present whenever an Option has been concluded.  Write the program to ensure it complies with the specific options:
+
+Each Option must make use of a function.
+•	A value returning function
+•	A function using a passing-by-value argument.
+•	A function using a passing-by-reference argument.
+
+Option A:
+Read in the number of terms to calculate and display for the Fibonacci sequence. f(n) = f(n-1) + f(n-2)
+
+Option B:
+Read in a sentence.  For each of the characters, output the character and the ASCII value of that character.  Each character on their own line.
+
+Option C:
+Read in two coordinates (X and Y) and a limit value.  Return two new coordinates where the coordinates have been modified using the following function: abs(coordinate - limit).
+
+Option X:
+Exit the program.
+
+
+
+
+
+
+

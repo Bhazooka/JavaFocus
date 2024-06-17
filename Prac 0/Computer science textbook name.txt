@@ -1,0 +1,7 @@
+eve secret: Cast
+
+discord secret: Conditional 
+
+moodle VPL secret anouncement : algorithm
+
+C++ Programming From Problem Analysis to Program Design by D. S. Malik 8th edition

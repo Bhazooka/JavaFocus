@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1652626831 source:c:\users\barbu\desktop\computer science 1a work\prac 10\libprac10.cpp
+	"libPrac10.h"
+
+1652625234 c:\users\barbu\desktop\computer science 1a work\prac 10\libprac10.h
+	<cstdlib>
+	<cctype>
+	<cmath>
+	<ctime>
+	<sstream>
+	<cassert>
+	<iostream>
+	<iomanip>
+
+1652625234 source:c:\users\barbu\desktop\computer science 1a work\prac 10\main.cpp
+	<iostream>
+	"libPrac10.h"
+

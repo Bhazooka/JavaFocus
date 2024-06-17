@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1650800547 source:c:\users\barbu\desktop\computer science 1a work\practice 2\libpractice2.cpp
+	"libPractice2.h"
+
+1650800795 c:\users\barbu\desktop\computer science 1a work\practice 2\libpractice2.h
+	<iostream>
+	<ctime>
+	<cstdlib>
+	<sstream>
+	<cctype>
+	<cmath>
+
+1650800795 source:c:\users\barbu\desktop\computer science 1a work\practice 2\main.cpp
+	"libPractice2.h"
+	<iostream>
+
+1650801025 source:c:\users\barbu\desktop\computer science 1a work\practice 2 (code for placing random obj in world)\libpractice2.cpp
+	"libPractice2.h"
+
+1650800795 c:\users\barbu\desktop\computer science 1a work\practice 2 (code for placing random obj in world)\libpractice2.h
+	<iostream>
+	<ctime>
+	<cstdlib>
+	<sstream>
+	<cctype>
+	<cmath>
+
+1650800795 source:c:\users\barbu\desktop\computer science 1a work\practice 2 (code for placing random obj in world)\main.cpp
+	"libPractice2.h"
+	<iostream>
+

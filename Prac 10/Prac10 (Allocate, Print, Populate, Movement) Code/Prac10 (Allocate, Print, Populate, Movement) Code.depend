@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1652356314 source:c:\users\barbu\desktop\computer science 1a work\prac10 (allocate, print, populate, movement) code\libprac10_80%code.cpp
+	"libPrac10_80%Code.h"
+
+1652356346 c:\users\barbu\desktop\computer science 1a work\prac10 (allocate, print, populate, movement) code\libprac10_80%code.h
+	<cstdlib>
+	<cctype>
+	<cmath>
+	<ctime>
+	<sstream>
+	<cassert>
+	<iostream>
+
+1652356314 source:c:\users\barbu\desktop\computer science 1a work\prac10 (allocate, print, populate, movement) code\main.cpp
+	<iostream>
+	"libPrac10_80%Code.h"
+

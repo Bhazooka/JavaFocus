@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1649886832 source:c:\users\barbu\desktop\computer science 1a work\prac 007\libprac7.cpp
+	"libPrac7.h"
+
+1649886832 c:\users\barbu\desktop\computer science 1a work\prac 007\libprac7.h
+	<iostream>
+	<cstdlib>
+	<cmath>
+	<ctime>
+	<iomanip>
+	<sstream>
+	<cassert>
+	<iomanip>
+
+1649886832 source:c:\users\barbu\desktop\computer science 1a work\prac 007\main.cpp
+	<iostream>
+	"libPrac7.h"
+

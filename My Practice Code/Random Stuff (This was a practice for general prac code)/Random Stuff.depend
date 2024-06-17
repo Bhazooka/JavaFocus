@@ -1,0 +1,37 @@
+# depslib dependency file v1.0
+1652714076 source:c:\users\barbu\desktop\computer science 1a work\random stuff\main.cpp
+	<iostream>
+	"libRandom.h"
+
+1652721149 c:\users\barbu\desktop\computer science 1a work\random stuff\librandom.h
+	<iostream>
+	<cstdlib>
+	<sstream>
+	<cctype>
+	<ctime>
+	<cmath>
+	<cstring>
+	<iomanip>
+	<cassert>
+
+1652721676 source:c:\users\barbu\desktop\computer science 1a work\random stuff\librandom.cpp
+	"libRandom.h"
+
+1652800721 source:c:\users\barbu\desktop\csc01a1\random stuff\main.cpp
+	<iostream>
+	"libRandom.h"
+
+1652801264 c:\users\barbu\desktop\csc01a1\random stuff\librandom.h
+	<iostream>
+	<cstdlib>
+	<sstream>
+	<cctype>
+	<ctime>
+	<cmath>
+	<cstring>
+	<iomanip>
+	<cassert>
+
+1652800683 source:c:\users\barbu\desktop\csc01a1\random stuff\librandom.cpp
+	"libRandom.h"
+

@@ -1,0 +1,35 @@
+Using fucntions For practical 4
+
+#include <iostream>
+#include <cstdlib>
+
+using namespace std;
+
+
+//creating a funtion
+int maximum(int x, int y)
+{
+    if (x > y)
+        return x;
+        else
+        return y;
+}
+
+void printMessage()
+{
+    cout << "Well done";
+}
+
+
+int main()
+{
+    int a, b;
+
+    cout << "Enter 2 numbers to find the greatest: "<< endl;
+    cin >> a >> b;
+    int c = maximum(a,b); //Calling the function
+    cout << "greatest value is: " << c << endl;
+    printMessage();
+
+    return 0;
+}

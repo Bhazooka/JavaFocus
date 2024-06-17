@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1652294098 source:c:\users\barbu\desktop\computer science 1a work\practice 3 (prac 9 code)\main.cpp
+	"libCrime.h"
+	<iostream>
+
+1652293137 c:\users\barbu\desktop\computer science 1a work\practice 3 (prac 9 code)\libcrime.h
+	<iostream>
+	<cstdlib>
+	<ctime>
+	<sstream>
+	<cctype>
+	<cassert>
+
+1652293272 source:c:\users\barbu\desktop\computer science 1a work\practice 3 (prac 9 code)\libcrime.cpp
+	"libCrime.h"
+

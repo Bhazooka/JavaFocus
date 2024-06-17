@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1651784447 source:c:\users\barbu\desktop\computer science 1a work\prac 9\main.cpp
+	<iostream>
+	"libPrac9.h"
+
+1651811107 c:\users\barbu\desktop\computer science 1a work\prac 9\libprac9.h
+	<iostream>
+	<cstdlib>
+	<ctime>
+	<cmath>
+	<sstream>
+	<cctype>
+	<cassert>
+
+1651784983 source:c:\users\barbu\desktop\computer science 1a work\prac 9\libprac9.cpp
+	"libPrac9.h"
+

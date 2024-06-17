@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1651077089 source:c:\users\barbu\desktop\computer science 1a work\prac 8\main.cpp
+	"libZork.h"
+	<iostream>
+
+1651077089 c:\users\barbu\desktop\computer science 1a work\prac 8\libzork.h
+	<iostream>
+	<cstdlib>
+	<ctime>
+	<cmath>
+	<sstream>
+	<cctype>
+
+1651077648 source:c:\users\barbu\desktop\computer science 1a work\prac 8\libzork.cpp
+	"libZork.h"
+
+1651077648 source:c:\users\barbu\desktop\1a\csc01a1\prac projects\prac 8\libzork.cpp
+	"libZork.h"
+
+1651077089 c:\users\barbu\desktop\1a\csc01a1\prac projects\prac 8\libzork.h
+	<iostream>
+	<cstdlib>
+	<ctime>
+	<cmath>
+	<sstream>
+	<cctype>
+
+1651077089 source:c:\users\barbu\desktop\1a\csc01a1\prac projects\prac 8\main.cpp
+	"libZork.h"
+	<iostream>
+

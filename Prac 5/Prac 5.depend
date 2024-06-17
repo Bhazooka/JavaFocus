@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1648106158 source:c:\users\barbu\desktop\computer science 1a work\prac 5\libprac5.cpp
+	"libPrac5.h"
+
+1648106158 c:\users\barbu\desktop\computer science 1a work\prac 5\libprac5.h
+	<ctime>
+	<cstdlib>
+	<iostream>
+	<vector>
+	<algorithm>
+
+1648112425 source:c:\users\barbu\desktop\computer science 1a work\prac 5\main.cpp
+	<iostream>
+	"libPrac5.h"
+

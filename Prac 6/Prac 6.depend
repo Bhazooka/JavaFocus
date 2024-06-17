@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1648764205 source:c:\users\barbu\desktop\1a\csc01a1\prac projects\prac 6\main.cpp
+	<iostream>
+	"libPrac6.h"
+
+1648764205 c:\users\barbu\desktop\1a\csc01a1\prac projects\prac 6\libprac6.h
+	<iostream>
+	<cstdlib>
+	<ctime>
+	<cmath>
+
