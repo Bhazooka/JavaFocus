@@ -1,0 +1,5 @@
+In javaFX, textFields only allow you to enter a single line of string, you cannot add new line 
+
+use textArea instead if you want to be able to add new lines
+
+I didnt create JavaFX project for this one, I imported everything raw

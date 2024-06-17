@@ -1,0 +1,37 @@
+package acsse.csc2b.client;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+public class Client extends Application
+{ 
+	public Client ()
+	{
+		
+	}
+
+	@Override
+	public void start(Stage primaryStage)
+	{
+		try 
+		{
+			GUI pane = new GUI(); 
+			Scene myScene = new Scene(pane); 
+			
+			primaryStage.setScene(myScene);
+			primaryStage.setHeight(700);
+			primaryStage.setWidth(950);
+			primaryStage.setTitle("Image File Transfer");
+			primaryStage.show(); 
+			
+		}
+		catch(Exception e)
+		{
+			System.err.println(e.getMessage()); 
+			System.err.println("Client, start method - Stage Exception"); 
+		}
+	}
+	
+}

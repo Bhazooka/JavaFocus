@@ -1,0 +1,321 @@
+package csc2b.server;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+import javax.swing.plaf.metal.MetalIconFactory.FileIcon16;
+
+/**
+ * @author 221005009 BUKANGA, B
+ *	Server Handler class, handles client connections and request
+ *	For each request, a response is sent
+ */
+public class ZEDEMHandler implements Runnable {
+	
+	Socket clientConnection;
+	BufferedReader br;
+	PrintWriter pw;
+	DataOutputStream dos;
+	DataInputStream dis;
+
+	public ZEDEMHandler(Socket connection) {
+		this.clientConnection = connection;
+		
+		try {
+			br = new BufferedReader(new InputStreamReader(clientConnection.getInputStream()));
+			pw = new PrintWriter(clientConnection.getOutputStream());
+			dos = new DataOutputStream(clientConnection.getOutputStream());
+			dis = new DataInputStream(clientConnection.getInputStream());
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * Run method to handle case request, 
+	 * Server responds depending on command received from client
+	 */
+	@Override
+	public void run() {
+		boolean running = true;
+		System.out.println("Handling client request");
+		
+		try {
+			while(running) {
+				String request = "";
+				
+				request = br.readLine();
+				
+				if(request.contains("BONJOUR"))
+				{
+					StringTokenizer token = new StringTokenizer(request);
+					String command = token.nextToken();
+					String userName = token.nextToken();
+					String Password = token.nextToken();
+					
+					if(matchUser(userName, Password) == true) {
+						sendResponse("JA <"+ command +"> login successful");
+					}
+					else
+					{
+						sendResponse("NEE <" + command +"> failed. Incorrect Username or Password");
+					}
+
+				}
+				else if(request.contains("PLAYLIST")) {
+					ArrayList<String> List = getFileList();
+					sendResponse("JA <"+request+" Sent");
+					
+					for(String item : List)
+					{
+						dos.writeUTF(item);
+					}
+					
+				}
+				else if(request.contains("ZEDEMGET")) {
+					String[] command = request.split(" ");
+					String ID = command[1];
+					idToFileName(ID);
+				}
+				else if(request.contains("ZEDEMBYE"))
+				{
+					clientConnection.close();
+					System.out.println("Closing Streams \nClient Logged Off");
+				}
+				else if(request.contains("UPLOAD")) {
+					StringTokenizer token = new StringTokenizer(request);
+					String command = token.nextToken();
+	                String fileRecID = token.nextToken();
+	                String fileRecName = token.nextToken();
+	                int size = Integer.parseInt(token.nextToken());
+
+	                PrintWriter writeOut = new PrintWriter(new BufferedWriter(new FileWriter("./data/server/ImgList.txt", true)));
+	                writeOut.println(fileRecID + " " + fileRecName);
+	                writeOut.flush();
+	                writeOut.close();
+	                System.out.println("File appended to list");
+
+	                File fileToRec = new File("data/server/" + fileRecName);
+	                FileOutputStream fos = null;
+	                System.out.println("Still receiving bytes from client...");
+
+	                try {
+	                    fos = new FileOutputStream(fileToRec);
+	                    byte[] buffer = new byte[1024];
+	                    int n = 0;
+	                    int totalBytes = 0;
+	                    while (totalBytes != size) {
+	                        n = dis.read(buffer, 0, buffer.length);
+	                        fos.write(buffer, 0, n);
+	                        fos.flush();
+	                        totalBytes += n;
+	                    }
+
+	                    pw.println("HAPPY");
+	                    pw.flush();
+	                    System.out.println("FILE UPLOADED");
+
+	                } catch (IOException e) {
+	                	pw.println("SAD");
+	                	pw.flush();
+	                    e.printStackTrace();
+	                } finally {
+	                    if (fos != null) {
+	                        try {
+	                            fos.close();
+	                        } catch (IOException e) {
+	                            e.printStackTrace();
+	                        }
+	                    }
+	                }
+				}
+				else {
+					System.out.println("Invalid");
+				}
+				
+				
+			}
+			
+		}catch (IOException e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			}
+	}
+	
+	
+	
+	/**
+	 * Validate User helper method
+	 * 	This method will be called in the Login function
+	 * @param userN	variable to store username Passed through parameters
+	 * @param passW	variable to store password Passed through parametera
+	 * @return
+	 */
+	private boolean matchUser(String userN, String passW)
+	{
+		boolean found = false;
+		
+		//Code to search users.txt file for match with userN and passW.
+		File userFile = new File("data/server/users.txt");
+		try
+		{
+		    Scanner scan = new Scanner(userFile);
+		    while(scan.hasNextLine()&&!found)
+		    {
+				String line = scan.nextLine();
+				String lineSec[] = line.split("\\s");
+		    		
+				//***OMITTED - Enter code here to compare user*** 
+				if(userN.contains(lineSec[0]) && passW.contains(lineSec[1])) 
+				{
+					found = true;
+				}
+		    }
+		    scan.close();
+		}
+		catch(IOException ex)
+		{
+		    ex.printStackTrace();
+		}
+		
+		return found;
+	}
+	
+	
+	private ArrayList<String> getFileList()
+	{
+		ArrayList<String> result = new ArrayList<String>();
+		
+		//Code to add list text file contents to the arraylist.
+		File lstFile = new File("data/server/List.txt");
+		try
+		{
+			Scanner scan = new Scanner(lstFile);
+
+			//***OMITTED - Read each line of the file and add to the arraylist***
+			while(scan.hasNext())
+			{
+				String line = scan.nextLine();
+				StringTokenizer token = new StringTokenizer(line);
+				String ID = token.nextToken();
+				String fileName = token.nextToken();
+				
+				result.add(ID + " " + fileName);	
+			}
+			
+			scan.close();
+		}	    
+		catch(IOException ex)
+		{
+			ex.printStackTrace();
+		}
+		
+		return result;
+	}
+	
+	
+	
+	
+	/**
+	 * Method used to associate ID number to file name, 
+	 * From then the correct file is sent
+	 * @param strID
+	 */
+	private void idToFileName(String strID)
+	{
+		//Code to find the file name that matches strID
+		File lstFile = new File("data/server/List.txt");
+    	try
+    	{
+    		
+    		if(Integer.parseInt(strID) >= 4)
+    		{
+    			sendResponse("<NEE Invalid file ID>");
+    			System.out.println("NEE Invalid file ID");
+    		}
+    		else
+    		{
+    			Scanner scan = new Scanner(lstFile);
+
+        		String line = "";
+        		//***OMITTED - Read filename from file and search for filename based on ID***
+        		while(scan.hasNext()) {
+        			
+        			line = scan.nextLine();
+        			String[] lineSong = line.split(" ");
+        			
+        			if(lineSong[0].contains(strID)) {
+        				
+        				String fileName = lineSong[1];
+        				
+        				File file = new File("data/server/" + fileName);
+        				
+        				System.out.println("the file Name #" + fileName);
+        				if(file.exists()) {
+        					pw.println("<JA song retrieved #"+fileName+"#"+String.valueOf(file.length()));
+        					pw.flush();
+        					
+        					System.out.println("this file size #"+file.length());
+        					
+        					FileInputStream fis = new FileInputStream(file);
+        					
+        					byte[] buffer = new byte[2048];
+        					
+        					int n=0;
+        					
+        					while((n=fis.read(buffer))>0)
+        					{
+        						dos.write(buffer, 0, n);
+        						dos.flush();
+        					}
+        					fis.close();
+        				}
+        				else
+        				{
+        					sendResponse("<NEE File doesn't exist>");
+        					System.out.println("FILE DNE");
+        				}
+        				break;
+        			}
+        			
+        		}
+
+        		scan.close();
+        	}
+    	}
+    	catch(IOException ex)
+    	{
+    		ex.printStackTrace();
+    	}
+		
+	}
+	
+	
+	
+	/**
+	 * Method to send to the client
+	 * @param response
+	 */
+	private void sendResponse(String response)
+	{
+		pw.println(response);
+		pw.flush();
+	}
+	
+	
+	
+}

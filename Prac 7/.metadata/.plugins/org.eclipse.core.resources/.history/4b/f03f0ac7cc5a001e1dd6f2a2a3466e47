@@ -1,0 +1,135 @@
+package csc2b.client;
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.ArrayList;
+
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+
+public class ZEDEMClientPane extends GridPane //You may change the JavaFX pane layout
+{
+	
+	Label lblUserame = new Label("Username");
+	Label lblPassword = new Label("Password");
+	Label lblID = new Label("ID");
+	Label lblConnectionSatut = new Label("Connection Status: ");
+	Label lblResponse = new Label("Response: ");
+	
+	TextField txtUsername = new TextField("User");
+	TextField txtPassword = new TextField("Pass235");
+	TextField txtID = new TextField("");		//to enter the download ID
+	TextField txtConnectionStatus = new TextField();
+	TextField txtResponse = new TextField();
+	
+	TextArea txtList = new TextArea();
+	ArrayList<String> songList = new ArrayList<String>();
+	
+	Button btnLogin = new Button("Login");
+	Button btnList = new Button("List");
+	Button btnDownload = new Button("Download");
+	Button btnLogout = new Button("Logout");
+	
+	//streams
+	Socket client;
+	PrintWriter pw;		//i dont think ill need this
+	BufferedReader br;
+	DataInputStream dis;
+	DataOutputStream dos;
+
+	
+	public ZEDEMClientPane() {
+		
+		setVgap(10);
+		setHgap(10);
+		
+		add(lblUserame, 0, 0);
+		add(txtUsername, 0, 1);
+		add(lblPassword, 0, 2);
+		add(txtPassword, 0, 3);
+		add(btnLogin, 0, 4);
+		add(lblConnectionSatut, 1, 0);
+		add(txtConnectionStatus, 2, 0);
+		
+		try {
+			client = new Socket("localhost", 2021);
+			pw = new PrintWriter(client.getOutputStream());
+			br = new BufferedReader(new InputStreamReader(client.getInputStream()));
+			dis = new DataInputStream(client.getInputStream());
+			dos = new DataOutputStream(client.getOutputStream());
+		}catch(IOException ex) {
+			ex.printStackTrace();
+		}
+		
+		//remember to do a connect button
+		//btnConnect
+		
+		btnLogin.setOnAction(e-> {
+			//
+		});
+		
+		btnList.setOnAction(e-> {
+			
+		});
+		
+		btnDownload.setOnAction(e-> {
+			
+		});
+		
+		btnLogout.setOnAction(e-> {
+			
+		});
+		
+	}
+	
+	private void Login(String username, String password) {
+		sendCommand("BONJOUR <"+username+"> <"+password+">");
+		String response = recieveResponse();
+		
+		if(response.contains("JA"))
+		{
+			txtResponse.setText(response);
+			
+			//add(lblResonse );
+		}
+		
+	}
+	
+	private void PlayList() {
+		
+	}
+	
+	private void Download() {
+		
+	}
+	
+	
+	private void sendCommand(String command){
+		pw.println(command);
+		pw.flush();
+	}
+	
+	
+	private String recieveResponse() {
+		String serverResponse = "";
+		
+		try {
+			br = new BufferedReader(new InputStreamReader(client.getInputStream()));
+			serverResponse = br.readLine();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return serverResponse;
+	}
+
+}

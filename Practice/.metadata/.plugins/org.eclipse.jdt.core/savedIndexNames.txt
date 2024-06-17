@@ -1,0 +1,4 @@
+INDEX VERSION 1.131+C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\Practicals\Practice\.metadata\.plugins\org.eclipse.jdt.core
+2404286716.index
+1729965866.index
+1865797976.index

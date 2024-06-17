@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="SmartImportWizard">
+		<item key="SmartImportRootWizardPage.STORE_HIDE_ALREADY_OPEN" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_CLOSE_IMPORTED" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
+		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
+		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\Practicals\Prac 4\Prac_04_New"/>
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\Practicals\Prac 6\P06_2023"/>
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\Practicals\Prac 4"/>
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\Practicals\Prac 4\Prac_04"/>
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\YEARS PASSED\CSC02B2 (MATHOLE 2022 Go to File)\Practicals\MATHOLE_KB_220017565_CSC02B2_2022_P06"/>
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\Practicals\Prac 3\Prac_03"/>
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\Practicals\Practice\Prac_01_2020_Demonstration"/>
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\Ngobeni_N_221024235_CSC2B_2023_P01"/>
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2A\CSC02A2\Practicals\Prac_05\BUKANGA_B_221005009_CSC02A2_2023_P05"/>
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2A\CSC02A2\Practicals\Prac_05\Prac_05_Solution"/>
+		</list>
+	</section>
+	<section name="NewWizardAction">
+		<item key="NewWizardSelectionPage.STORE_SELECTED_ID" value="org.eclipse.fx.ide.jdt.ui.javafx"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.eclipse.fx.ide"/>
+		</list>
+	</section>
+	<section name="CleanDialogSettings">
+		<item key="TOGGLE_SELECTED" value="false"/>
+		<item key="DIALOG_WIDTH" value="500"/>
+		<item key="DIALOG_HEIGHT" value="389"/>
+		<item key="DIALOG_FONT_NAME" value="1|Segoe UI|9.0|0|WINDOWS|1|-12|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI"/>
+	</section>
+	<section name="ResourceNavigator">
+		<item key="ResourceViewer.STORE_SORT_TYPE" value="1"/>
+		<item key="ResourceWorkingSetFilter.STORE_WORKING_SET" value="Aggregate for window 1689686801861"/>
+	</section>
+</section>

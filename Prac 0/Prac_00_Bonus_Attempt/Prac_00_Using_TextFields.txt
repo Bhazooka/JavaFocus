@@ -1,0 +1,167 @@
+Failed attempts using textField instead of textArea
+
+package application;
+
+/*
+import java.awt.TextArea;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class Main extends Application {
+
+    private TextArea textfield;
+
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("JavaFX TextField Display");
+
+        // Create a TextField to display the output
+        textfield = new TextArea();
+        //textfield.setPrefWidth(600);
+        //textfield.setPrefHeight(600);
+        
+
+        // Create a button to trigger the action
+        Button displayButton = new Button("Display Output");
+        displayButton.setOnAction(e -> displayOutput());
+
+        // Create a VBox to hold the TextField and Button
+        VBox root = new VBox(10);
+        root.getChildren().addAll(textfield, displayButton);
+        root.setMinSize(300, 150);
+
+        // Create the scene and set it on the stage
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    private void displayOutput() {
+        // This is where you generate the output
+        String output = "";
+
+        // Update the TextField with the output
+        
+    
+        for (int port = 1; port <= 3000; port++) {
+        	
+            try (Socket s = new Socket("localhost", port)) {
+				//System.out.println("Program connected to localhost: " + s.getPort());
+				//System.out.println("Local Port of the connection: " + s.getLocalPort());
+				//System.out.println("Remote Host of the connection: " + s.getPort());
+            	output += ("Program connected to localhost: " + s.getPort() + "\n");
+            	output += ("Local Port of the connection: " + s.getLocalPort() + "\n");
+            	output += ("Remote Host of the connection: " + s.getPort() + "\n");
+                
+            } catch (IOException e) {
+                //System.err.println("Couldn't connect to port " + port);
+            	output += ("Couldn't connect to port " + port + "\n");
+            }
+        }
+        
+    	
+    	try {
+			InetAddress IP = InetAddress.getLocalHost();
+			//System.out.println("The computer IP Address: " + IP.getHostAddress());
+			output += ("\nThe computer IP Address: " + IP.getHostAddress());
+		} catch (UnknownHostException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+    	
+    	textfield.setText(output);
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+
+*/
+
+
+
+
+
+
+
+//Version 2
+/*
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import java.net.InetAddress;
+import java.net.Socket;
+import java.net.UnknownHostException;
+import java.awt.TextArea;
+import java.io.IOException;
+
+public class Main extends Application {
+
+    private TextArea outputTextField;
+
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Socket Connection Test");
+
+        // Create a TextField to display the output
+        outputTextField = new TextArea();
+        outputTextField.setEditable(false);
+        //outputTextField.setPrefWidth(400);
+
+        // Create a Button to start the port scanning
+        Button startButton = new Button("Start Port Scanning");
+        startButton.setOnAction(e -> startPortScanning());
+
+        // Create a VBox to hold the TextField and Button
+        VBox root = new VBox(10);
+        root.getChildren().addAll(outputTextField, startButton);
+        root.setMinSize(500, 200);
+
+        // Create the scene and set it on the stage
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.show();
+    }
+
+    private void startPortScanning() {
+        StringBuilder output = new StringBuilder();
+
+        for (int port = 1; port <= 3000; port++) {
+            try (Socket s = new Socket("localhost", port)) {
+                output.append("\nProgram connected to localhost: ").append(s.getPort()).append("\n");
+                output.append("\nLocal Port of the connection: ").append(s.getLocalPort()).append("\n");
+                output.append("\nRemote Host of the connection: ").append(s.getPort()).append("\n");
+            } catch (IOException e) {
+                output.append("\nCouldn't connect to port ").append(port).append("\n");
+            }
+        }
+
+        try {
+            InetAddress IP = InetAddress.getLocalHost();
+            output.append("\nThe computer IP Address: ").append(IP.getHostAddress());
+        } catch (UnknownHostException e1) {
+            e1.printStackTrace();
+        }
+
+        // Update the TextField with the output
+        outputTextField.setText(output.toString());
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
+*/

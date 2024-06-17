@@ -1,0 +1,19 @@
+
+14.9: Partial derivatives
+https://www.youtube.com/watch?v=AXH9Xm6Rbfc	(Prof Dave explains)
+
+
+14.2 Working with epsilon example (searched because of q3 of the tut 14.2)
+https://www.youtube.com/watch?v=XLtkDkqk54Y&t=21s
+
+14.2 precise definition of a limit for multivariable function (searched cause of q3 of tut 14.2)
+- https://www.youtube.com/watch?v=CCDxj3g_BVk (good explanation)
+- https://www.youtube.com/watch?v=PEgjh5YAN5k
+
+14.2 Prof V
+https://www.youtube.com/watch?v=qh8q2-6v-R8	(Very good)
+
+14.3 Prof Dave
+Implicit differentiation		(This is needed for chapter 3, along with chain rule, quotient rule)
+https://www.youtube.com/watch?v=M0SMSWM2oZA
+

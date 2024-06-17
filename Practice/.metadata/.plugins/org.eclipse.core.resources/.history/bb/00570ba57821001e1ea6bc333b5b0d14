@@ -1,0 +1,113 @@
+package za.ac.uj.acsse.csc2b.server;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Scanner;
+
+public class Server {
+
+	public static void main(String[] args) {
+		
+		try {
+			ServerSocket SS = new ServerSocket(8888);
+			System.out.println("Waiting for client.");
+			
+			
+			Socket connectionToClient = SS.accept();
+			System.out.println("HELLO - You may ask me 4 questions.");
+			
+			//This is the stuff the chatbot will reply
+			BufferedReader br = new BufferedReader(new InputStreamReader(connectionToClient.getInputStream()));
+			PrintWriter pw = new PrintWriter(connectionToClient.getOutputStream());
+			
+			boolean isRunning = true;
+			
+			String command = "";
+			
+			
+			
+			for(int count = 1; count <= 4; count++ ) 
+			{
+				pw.print("ASK: ");
+				pw.flush();
+				
+				command = br.readLine();
+				
+			}
+			
+			
+			
+			
+			
+			
+			//Answers
+			for(int count = 1; count <= 4; count++)
+			{
+				String answer = "";
+				
+				if(command.indexOf("Are") == 0)
+				{
+					answer = "No";
+					answer = "Maybe";
+				}
+				else if(command.indexOf("Why") == 0)
+				{
+					answer = "Because the boss says so";
+				}
+				else 
+				{
+					answer = "Oh okay";
+				}
+				
+				
+				System.out.print(count + "#: [");
+				pw.println(answer);
+				System.out.println(".]");
+				
+			}
+
+			
+			
+			
+			System.out.println("HAPPY TO HAVE GELPED - 4 Questions answered");
+			isRunning =  false;
+			
+			if(command == "HELLO BOT") {
+				isRunning = true;
+			}
+			
+			
+			/*			
+			while(isRunning) {
+				pw.println("How can I help you?");
+				pw.flush();
+				
+				command = br.readLine();
+				if(command.equals("Bye"))
+				{
+					pw.println();
+					pw.flush();
+					isRunning = false;
+				}
+				else
+				{
+					pw.println();
+					pw.flush();
+				}
+				
+			}
+			*/
+			
+		} 
+		catch (IOException e) {
+			System.err.println("Connection failed.");
+		}
+	
+	}
+
+	
+}

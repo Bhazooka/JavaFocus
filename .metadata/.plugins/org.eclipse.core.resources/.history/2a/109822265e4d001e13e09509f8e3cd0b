@@ -1,0 +1,496 @@
+package GUI;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.net.InetAddress;
+import java.nio.file.Files;
+import java.util.Scanner;
+import UDP.client.*;
+import UDP.server.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
+
+/**
+ * @author Mathole KB
+ * @version Practical_06
+ * This is where the user interface is implements in details. This class can be used by 
+ * bout the seeder and the leecher. 
+ */
+public class GUI extends GridPane
+{
+	private Stage primaryStage = null;
+	private String mode = null;
+	private boolean seederMode = false; 
+	private boolean leecherMode = false;
+	private Server udpServer = null;
+	private int fileID = 0; 
+	private InetAddress destinationAddress = null; 
+	private int destinationPort = 2; 
+	private Client client = null;
+	private boolean isConnected = false; 
+	
+	/**
+	 * This method takes a Stage by reference
+	 * @param primaryStage the root of the user interface
+	 */
+	public GUI(Stage primaryStage)
+	{
+		this.primaryStage = primaryStage; 
+		modeSelector();
+	}
+	
+	/**
+	 * This method defines the ui for the mode selector, 
+	 * whether the user is acessing the seeder side or leecher side
+	 */
+	private void modeSelector()
+	{
+		GridPane selectorPane = new GridPane(); 
+		Scene scene = new Scene(selectorPane, 300, 200); 
+		Stage stage = new Stage(); 
+		stage.setTitle("Mode Selection");
+		stage.setScene(scene);
+		
+		/**			NOT NEEDED
+		Modality Setting: stage.initModality(Modality.APPLICATION_MODAL) sets the stage's modality to APPLICATION_MODAL, meaning that the new window will block input to other windows of the application until it is closed.
+		*/
+		stage.initModality(Modality.APPLICATION_MODAL);
+
+		
+		stage.show();
+		
+		
+		//The mode list 
+		
+		/**		CAN BE USED FOR DROP DOWN MENU
+		ComboBox Creation: A ComboBox named cBox is created. A ComboBox is a drop-down list that allows the user to select an item from a list of options.
+		*/
+		ComboBox<String> cBox = new ComboBox<String>();
+		/**
+		ObservableList and Options: An ObservableList named options is created. This list contains the options "Seeder" and "Leecher." The setItems method is used to set these options as the items in the cBox ComboBox.
+		*/
+		ObservableList<String> options = FXCollections.observableArrayList("Seeder", "Leecher"); 
+		cBox.setItems(options);
+		
+		cBox.valueProperty().addListener(new ChangeListener<String>() {
+
+		/**
+		Change Handling: In the changed method of the listener, the code checks the newValue (the newly selected value in the ComboBox) and updates the mode, seederMode, and leecherMode variables accordingly:
+		*/
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if(newValue.equals("Seeder")){
+					mode = new String(newValue);
+					seederMode = true; 
+					leecherMode = false; 
+				}
+				else if(newValue.equals("Leecher")) {
+					mode = new String(newValue);
+					leecherMode = true; 
+					seederMode = false; 
+				}
+				else {
+					leecherMode = false; 
+					seederMode = false; 
+					
+				}
+			}
+		});
+		
+		
+		Text text1 = new Text("Welcome to Peer-to-Peer File Sharing.");
+		Text text2 = new Text("Please select the mode you are today."); 
+		Label modeLabel = new Label("Mode:"); 
+		text1.setFont(Font.font("Arial", FontWeight.EXTRA_BOLD, 16));
+		text2.setFont(Font.font("Arial", FontWeight.BOLD,FontPosture.ITALIC , 12));
+		modeLabel.setFont(Font.font("Arial", FontWeight.BLACK, 15));
+		
+		Button nextButton = new Button("Next"); 
+		
+		selectorPane.add(text1, 0, 0); 
+		selectorPane.add(text2, 0, 1);  
+		selectorPane.add(new HBox(12, modeLabel, cBox) ,0, 2); 
+		selectorPane.add(nextButton, 0, 3); 
+		selectorPane.setPadding(new Insets(10));
+		selectorPane.setVgap(10);
+		selectorPane.setAlignment(Pos.CENTER);
+		
+		nextButton.setOnAction((event) -> {
+			
+			
+			/**
+			If one of the options are selected between leecher and seeder, the main selection window will close and one of the other windows will open (window for leecher or window for seeder)
+			*/
+			if( ((leecherMode == false) && (seederMode==true)) || ((leecherMode == true) && (seederMode ==false)) )
+			{	
+				//alert(AlertType.INFORMATION, "You are making use of: " + mode + " mode."); 
+				primaryStage.show(); 
+				stage.close(); 
+				
+				//gui setup for either seeder of leecher depending on what's selected
+				guiSetup();
+			}
+		});
+	}
+	
+	/**
+		Interface is selected based on user choice of either seeder or leecher
+	 */
+	private void guiSetup()
+	{
+		if(seederMode == true){
+			//gui setup for seeder
+			seederGui();
+			
+		}
+		else if(leecherMode == true) {
+			//gui setup for leecher
+			leecherGui();
+		}
+		else {
+		}
+		
+	}
+	/**
+	 * This method defines the user interface of the seeder
+	 */
+	private void seederGui()
+	{
+		//Elements
+		Label seederLabel = new Label("Seeder Mode"); 
+		Label portLabel = new Label("Port"); 
+		TextField portField = new TextField("2022");
+		Button bindButton = new Button("Bind");  
+		Button addFilesButton = new Button("Add Files"); 
+		TextArea listArea = new TextArea("List: \n"); 
+		TextArea statusArea = new TextArea("Status Area: \n"); 
+		Button quitButton = new Button("Quit"); 
+		
+		//Arranging Elements
+		HBox firstHBox = new HBox(5, portLabel, portField, bindButton);
+		
+		VBox vBox = new VBox(10, seederLabel, addFilesButton, firstHBox, listArea, statusArea, quitButton); 
+		this.getChildren().add(vBox); 
+		
+		//Styling
+		seederLabel.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+		portLabel.setFont(Font.font("Arial", FontWeight.SEMI_BOLD, 15));
+		listArea.setEditable(false);
+		statusArea.setEditable(false);
+		portField.setMaxWidth(55);
+		
+		//adding to the root
+		this.setAlignment(Pos.CENTER);
+		this.setPadding(new Insets(10));
+		
+		//Attributes
+		
+		
+		//actions
+		bindButton.setOnAction((event) ->
+		{
+			if(!portField.getText().isBlank())
+			{
+			/**The trim function takes the text that I put in the textField and removes all white spaces*/				
+				final int PORT = Integer.parseInt(portField.getText().trim());
+				
+				//create upd server and starts the server to the specified port
+				udpServer = new Server(PORT); 
+				udpServer.setStatusArea(statusArea); 
+				Thread t = new Thread(udpServer); 
+				t.start();
+				
+				//I learnt something new here. When the UI and the Connection are run in the same thread
+				//the ui will be not responsive. 
+			}else {
+				alert(AlertType.ERROR, "Port is Empty.\nPlease Input the port value to bind to!"); 
+			} 
+			
+		});
+		
+		addFilesButton.setOnAction((event) ->
+		{
+			//read the list file for the last file id wrote
+			
+			final FileChooser fChooser = new FileChooser(); 
+			/** 
+			This is a dialog that allows the user to select files from their system.
+			*/
+			fChooser.setTitle("Files To Add"); 
+			/**
+			File fileSelected = fChooser.showOpenDialog(null);: This line displays the file chooser dialog and waits for the user to select a file. The selected file is stored in the fileSelected variable.
+			*/
+			File fileSelected = fChooser.showOpenDialog(null);
+			
+			
+			if(fileSelected != null)			//if fileSelected has a value (is not null)
+			{
+				try {
+					/**Files.copy is a method in Java that copies all the bytes from one file to another. It takes two arguments separated by a comma, where the first one specifies the source file and the second one specifies the destination file.
+					*/
+					Files.copy(fileSelected.toPath(), new FileOutputStream(new File("data/seederFiles/" + fileSelected.getName())));
+				} catch (FileNotFoundException e) {
+					System.err.println(e.getMessage());
+					System.err.println("UserInterfacePane, seederUI, addFilesButton, copy selected file to project directory");
+				} catch (IOException e) {
+					System.err.println(e.getMessage());
+					System.err.println("UserInterfacePane, seederUI, addFilesButton, copy selected file to project directory");
+				} 
+			}
+			
+			//read the last value of the file id
+			try(Scanner fScanner = new Scanner(new File("data/seederFiles/FileID.txt")))
+			{
+				if(fScanner.hasNext())
+				{
+					/**
+					The code then reads the last value of the file ID from a file named "FileID.txt" in the "data/seederFiles/" directory using a Scanner. It parses the value as an integer and stores it in the fileID variable.
+					
+					The trim removes white spaces from string
+					IDK WHAT THIS TRIM DOES FIND OUT LATER
+					
+					Explaining the trim
+					fScanner.next(): The next() method of the Scanner reads the next token (word) from the input file. In this context, it's reading the next word or string token from the "FileID.txt" file.
+					trim(): The trim() method is called on the string read by fScanner. This method removes any leading whitespace (spaces, tabs, etc.) and trailing whitespace from the string.
+					The purpose of using trim() in this context is to ensure that the string obtained from the file, which might have leading or trailing spaces due to formatting or unintentional input, does not interfere with the conversion to an integer.
+					For example, if the content of "FileID.txt" was " 123 " (with spaces), using trim() would result in strFID having the value "123", which can be easily converted to an integer using Integer.valueOf(). Without trim(), the presence of spaces could cause conversion issues.
+					*/
+					String strFID = fScanner.next().trim(); 
+					fileID = Integer.valueOf(strFID); 
+				}
+				
+			} catch (FileNotFoundException e) 
+			{
+				System.err.println(e.getMessage());
+			}
+			
+			//add the file to the list file, and the file ID
+			/**
+			The code proceeds to add information about the selected file to a list file named "List.txt" in the "data/seederFiles/" directory.
+			It creates a File object named listFile representing the list file.
+			Inside a try-with-resources block, it creates a FileWriter (fWriter) to write to the list file in append mode (true as the second argument).
+			It writes a line to the list file containing the fileID, a space, and the name of the selected file. It then flushes the writer and increments the fileID.
+			After updating the list file, it also writes the new fileID back to the "FileID.txt" file, ensuring that it's up to date for the next file.
+			*/
+			File listFile = new File("data/seederFiles/List.txt"); 
+			try(FileWriter fWriter = new FileWriter(new File("data/seederFiles/List.txt"), true))/** the file writer takes 2 paremeters, the first is the place where it will write to, 
+			Append Mode Parameter: The second parameter is a boolean value (true in this case) that determines whether the FileWriter should append to an existing file (true) or overwrite the file if it already exists (false). When set to true, it means that if the file already exists, new content will be appended to the end of the file, preserving the existing content.*/
+			{
+				fWriter.write(fileID +" " + fileSelected.getName() + "\n");
+				fWriter.flush(); 
+				fileID++; 
+				
+				//write the last value of the file id
+				PrintWriter fIdWriter = new PrintWriter(new File("data/seederFiles/FileID.txt")); 
+				fIdWriter.print(fileID); 
+				fIdWriter.flush(); 
+				fIdWriter.close(); 
+				
+			} catch (IOException e) 
+			{
+				System.err.println(e.getMessage());
+				System.err.println("UserInterfacePane, seederUI, addFilesButton, addinf the file to the list");
+			}
+			
+			//display the list to the listArea
+			try(Scanner fScanner = new Scanner(new File("data/seederFiles/List.txt"))) 
+			{
+				listArea.clear();
+				listArea.appendText("List:\n"); 
+				while(fScanner.hasNextLine())
+				{
+					listArea.appendText(fScanner.nextLine() +"\n"); 
+				}
+			} catch (IOException e) {
+				System.err.println(e.getMessage());
+				System.err.println("UserInterfacePane, seederUI, addFilesButton, scanning the list file");
+			}
+			
+		});
+		quitButton.setOnAction((event) ->
+		{
+			if(this.udpServer != null)
+			{
+				udpServer.stopServer(false); 
+			}
+		});
+	}
+	/**
+	 * This method defines the user interface of the leecher
+	 */
+	private void leecherGui()
+	{
+		//Elements
+		Label leecherLabel = new Label("Leecher Mode"); 
+		Label conToServerLabel = new Label("Connect To Seeder"); 
+		Label addressLabel = new Label("Address");
+		TextField addressField = new TextField("localhost"); 
+		Label portLabel = new Label("Port");
+		TextField portField = new TextField("2022"); 
+		Button connectButton = new Button("Connect"); 
+		Label requestLabel = new Label("Request"); 
+		Button getListButton = new Button("Get List"); 
+		Label getFileLabel = new Label("Get File"); 
+		TextField getFileField = new TextField(); 
+		Button getFileButton = new Button("Get File"); 
+		TextArea listArea = new TextArea("List:\n"); 
+		TextArea statusArea = new TextArea("Status Area:\n");
+		
+		//Arranging 
+		HBox firstHBox = new HBox(10, addressLabel, addressField, portLabel, portField, connectButton); 
+		HBox secHBox = new HBox(10, getListButton, getFileLabel, getFileField, getFileButton); 
+		
+		VBox vBox = new VBox(10, leecherLabel, conToServerLabel, firstHBox,requestLabel ,secHBox, listArea, statusArea); 
+		
+		//styling
+		leecherLabel.setFont(Font.font("Arial", FontWeight.BOLD, 20));
+		conToServerLabel.setFont(Font.font("Arial", FontWeight.SEMI_BOLD, 17));
+		conToServerLabel.underlineProperty().setValue(true);
+		addressLabel.setFont(Font.font("Arial", FontWeight.SEMI_BOLD, 15));
+		requestLabel.setFont(Font.font("Arial", FontWeight.SEMI_BOLD, 17));
+		requestLabel.underlineProperty().setValue(true);
+		addressLabel.setFont(Font.font("Arial", FontWeight.SEMI_BOLD, 15));
+		portLabel.setFont(Font.font("Arial", FontWeight.SEMI_BOLD, 15));
+		getFileLabel.setFont(Font.font("Arial", FontWeight.SEMI_BOLD, 15));
+		listArea.setEditable(false);
+		statusArea.setEditable(false);
+		statusArea.setMaxHeight(100);
+		listArea.setMaxHeight(150);
+		portField.setMaxWidth(55);
+		getFileField.setMaxWidth(50);
+		
+		//adding
+		this.getChildren().add(vBox); 
+		
+		//Positioning
+		this.setAlignment(Pos.CENTER);
+		this.setPadding(new Insets(10));
+		
+		//actions
+		connectButton.setOnAction((event) -> 
+		{
+			if(!addressField.getText().isBlank() || !portField.getText().isBlank())
+			{
+				/**The trim function actually takes the text that I put in the textField and removes all white spaces*/
+				client = new Client(addressField.getText().trim(), Integer.parseInt(portField.getText().trim()));
+				
+				//send the connect command
+				client.sendCommands("Helo"); 
+				
+				//get the confirmation command
+				String response = client.getResponse(); 
+				statusArea.appendText("--" + response + "\n"); 
+				if(response.equals("Helo"))
+				{
+					isConnected  = true; 
+				}else {
+					isConnected = false; 
+				}
+			}
+			else
+			{
+				alert(AlertType.ERROR, "Address or Port is empty or contain white spaces");
+			}
+			
+		});
+		getListButton.setOnAction((event) -> 
+		{
+			if(isConnected == true)
+			{
+				//send the command
+				client.sendCommands("List"); 
+				
+				//get the list and append it to the list area
+				String response [] = client.getResponse().split("#");
+				
+				statusArea.appendText("--List\n"); 
+				for(String l : response)
+				{
+					listArea.appendText(l + "\n");
+				}
+				
+			}
+			else {
+				//send an alert
+			}
+			
+		});
+		getFileButton.setOnAction((event) -> 
+		{
+			if (isConnected == true) 
+			{
+				//send the File command
+				client.sendCommands("File#" + getFileField.getText().trim()); 
+				
+				//get the file name
+				String response[] = client.getResponse().split("#");
+				String fileName = response[0]; 
+				String fileSize = response[1]; 
+				String strBytes = response[2]; 
+				
+				statusArea.appendText("--File Name:" +fileName+"\tFileSize: "+ fileSize +"\n");
+				byte [] data = strBytes.getBytes(); 
+				
+				try 
+				{
+					FileOutputStream fos = new FileOutputStream(new File("data/leecherFiles/"+fileName));
+					fos.write(data);
+					fos.flush(); 
+					fos.close(); 
+				} catch (FileNotFoundException e) {
+					System.err.println(e.getMessage());
+					e.printStackTrace();
+				} catch (IOException e) {
+					System.err.println(e.getMessage());
+					e.printStackTrace();
+				} 
+			}
+			else {
+				//send an alert
+			}
+			
+		});
+		
+		
+		
+	}
+	/**
+	 * This method defines a general use case of the AlertType
+	 * @param aT AlertType	
+	 * @param message Alert message
+	 */
+	private void alert(AlertType aT, String message)
+	{
+		Alert alert = new Alert(aT); 
+		alert.setContentText(message);
+		alert.initModality(Modality.APPLICATION_MODAL);
+		alert.showAndWait();
+	}
+	
+}

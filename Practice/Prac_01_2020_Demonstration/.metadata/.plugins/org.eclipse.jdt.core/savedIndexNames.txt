@@ -1,0 +1,1 @@
+INDEX VERSION 1.131+C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\Practicals\Practice\Prac_01_2020_Demonstration\.metadata\.plugins\org.eclipse.jdt.core

@@ -1,0 +1,9 @@
+C:\javafx-17
+
+VM Arguments for my java fx
+
+
+--module-path "C:\javafx-17\lib" --add-modules javafx.base,javafx.controls,javafx.fxml,javafx.graphics,javafx.media
+
+
+--module-path "C:\Program Files\JavaFX\javafx-sdk-20\lib" --add-modules javafx.controls,javafx.fxml

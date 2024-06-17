@@ -1,0 +1,264 @@
+package acsse.csc2b.client;
+
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.Random;
+import java.util.StringTokenizer;
+
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
+
+public class GUI extends StackPane
+{
+	private Button uploadButton = new Button("Upload"); 
+	private Button listButton = new Button("List"); 
+	private Button retrieveButton = new Button("Retrieve");
+	private TextField retrieveField = new TextField(); 
+	private ImageView imageViewer = new ImageView(); 
+	private TextArea  statusArea = new TextArea("Client Response:\n");
+	private final int PORT = 9876;
+	 
+	private PrintWriter writer = null; 
+	private BufferedReader reader = null; 
+	private Socket connection = null; 
+	
+	public GUI()
+	{
+		//Set up the gui
+		setup();
+		
+		//make sure the server is running warning
+		Alert warningAlert = new Alert(AlertType.WARNING); 
+		warningAlert.setContentText("Please make sure the Server is running");
+		warningAlert.showAndWait(); 
+		
+		//Connect to Socket
+		connect(); 
+		
+		//ImageViewer
+		imageViewer.setImage(new Image("file:data/client/military-computer.jpg"));
+		
+		//list button 
+		listButton.setOnAction(event -> {
+			//send the PULL command to the server
+			sendCommand("PULL"); 
+			String line = ""; 
+			try 
+			{
+				reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+				line = reader.readLine(); 
+			} catch (IOException e) 
+			{
+				e.printStackTrace();
+			} 
+			
+			StringTokenizer tokenizer = new StringTokenizer(line, "#?"); 
+			while(tokenizer.hasMoreTokens())
+			{
+				statusArea.appendText(tokenizer.nextToken() +"\n"); 
+			}	
+		});
+		
+		//upload button
+		uploadButton.setOnAction(event -> 
+		{
+			final FileChooser fChooser = new FileChooser(); 
+			fChooser.setTitle("Selct Image to upload"); 
+			fChooser.setInitialDirectory(new File("data/client")); 
+			File fileToUpload = fChooser.showOpenDialog(null); 
+			
+			//uploading to server
+			try 
+			{
+				FileInputStream fis = new FileInputStream(fileToUpload);
+				DataOutputStream dataOut = new DataOutputStream(connection.getOutputStream()); 
+				
+				sendCommand("UPLOAD" + "#?" + String.valueOf(new Random().nextInt(0, 100)) + "#?" + fileToUpload.getName() +"#?" + String.valueOf(fileToUpload.length()));
+				
+				//sending the actual file
+				byte[] buffer = new byte[1024]; 
+				int n = 0; 
+				while( (n = fis.read(buffer)) > 0)
+				{
+					dataOut.write(buffer); 
+					dataOut.flush(); 
+				}
+				dataOut.close(); 
+				fis.close(); 
+				
+			} 
+			catch (FileNotFoundException e) 
+			{
+				System.err.println(e.getMessage()); 
+				System.err.println("ClientPane - FileInputStream FileNotFoundException");
+			} catch (IOException e) 
+			{
+				System.err.println(e.getMessage()); 
+				System.err.println("ClientPane - DataOutputStram IOException");
+			} 
+			
+			
+		});
+		
+		//retrieve button 
+		retrieveButton.setOnAction(event -> 
+		{
+			if(retrieveField.getText().isEmpty())
+			{
+				 
+				Alert alert = new Alert(AlertType.WARNING); 
+				alert.setContentText("There is no value inputed on the text filed"); 
+				
+				alert.showAndWait(); 
+			}
+			else 
+			{
+				try 
+				{
+					int ID = Integer.parseInt(retrieveField.getText());
+					sendCommand("DOWNLOAD#?" + ID);
+					
+					int fileSize = Integer.parseInt(getResponse());
+					File fileToRecieve = new File("data/client/ID.jpg");
+					FileOutputStream fos = new FileOutputStream(fileToRecieve);
+					DataInputStream dataIn = new DataInputStream(connection.getInputStream()); 
+					
+					byte [] buffer = new byte[1024]; 
+					int n = 0; 
+					int totalBytes = 0; 
+					
+					while(totalBytes!=fileSize)
+					{
+						n = dataIn.read(buffer, 0, buffer.length); 
+						fos.write(buffer, 0, n); 
+						fos.flush(); 
+						
+						totalBytes += n; 
+					}
+					
+				} 
+				catch (FileNotFoundException e) 
+				{
+					System.err.println(e.getMessage()); 
+					System.err.println("ClientPane - File/FileInputStram FileNotFoundException");
+				} catch (IOException e) 
+				{
+					System.err.println(e.getMessage()); 
+					System.err.println("ClientPane - DataInputStream IOException");	
+				} 
+				
+			}
+		}); 
+
+	}
+	
+	private void setup()
+	{
+		//****button set up****//
+		retrieveField.setPrefWidth(35);
+		uploadButton.setPrefSize(100, 20); 
+		listButton.setPrefSize(100, 20);
+		retrieveButton.setPrefSize(100, 20);
+		
+		//****ImageViewer set up****//
+			
+
+		
+		//****status area set up****//
+		statusArea.setMaxHeight(350);
+		statusArea.setEditable(false);
+		
+		HBox retrieveBox = new HBox(5, retrieveButton, retrieveField); 
+		HBox hBox = new HBox(10, listButton, uploadButton, retrieveBox);
+		hBox.setAlignment(Pos.TOP_CENTER);
+		hBox.setPadding(new Insets(15, 12, 15, 12));
+		
+		HBox centreBox = new HBox(10, imageViewer, statusArea);
+		centreBox.setAlignment(Pos.CENTER);
+		
+		
+		StackPane.setMargin(hBox, new Insets(25, 25, 25, 25));
+		
+		this.getChildren().addAll(new VBox(20, hBox, centreBox)); 
+	}
+	
+	private void sendCommand(String command)
+	{
+		try 
+		{
+			writer = new PrintWriter(connection.getOutputStream(), true);
+			writer.println(command);
+			writer.flush();
+		}
+		catch (IOException e) 
+		{
+			System.err.println(e.getMessage()); 
+			System.err.println("ClientPane, sendCommand method - PrintWriter IOException"); 
+		} 
+	}
+	private String getResponse()
+	{
+		String line = null; 
+		
+		try
+		{
+			reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			line = reader.readLine(); 
+			return line; 
+		} 
+		catch (IOException e) 
+		{
+			System.err.println(e.getMessage()); 
+			System.err.println("ClientPane, getResponse method - BufferedReader/InputStreamReader IOException"); 
+			
+		} 
+		
+		return null; 
+	}
+	
+	
+	private void connect()
+	{
+		try
+		{
+			connection = new Socket("localhost", PORT);
+			if(connection.isConnected())
+			{
+				Alert alert = new Alert(AlertType.CONFIRMATION); 
+				alert.setContentText("Connected to Server on port: " + connection.getPort());
+				alert.showAndWait(); 
+				
+			}
+		}
+		catch(IOException e)
+		{
+			System.err.println(e.getMessage()); 
+			System.err.println("ClientPane, connect method - Socket IOException"); 
+		}
+		
+	}
+}
+
+
+
+

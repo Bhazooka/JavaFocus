@@ -1,0 +1,3 @@
+https://www.youtube.com/watch?v=gchR3DpY-8Q&t=57s
+
+Here we created 2 seperate java projects, not just seperate classes

@@ -1,0 +1,16 @@
+How to make a basic gui with javafx
+https://www.youtube.com/watch?v=FLkOX4Eez6o
+Playlist
+https://www.youtube.com/watch?v=FLkOX4Eez6o&list=PL6gx4Cwl9DGBzfXLWLSYVy8EbTdpGbUIG
+
+
+
+how to make a basic server
+
+how to make a basic server client connection
+
+
+
+satic vs non-static methods
+https://www.youtube.com/watch?v=xKZ3sMimQYM
+https://www.youtube.com/watch?v=wa1HzkMqY9A (This is in more details)

@@ -1,0 +1,56 @@
+package za.ac.uj.acsse.csc2b.server;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Scanner;
+
+public class Server {
+
+	public static void main(String[] args) {
+		/*	
+		try {
+			ServerSocket SS = new ServerSocket(8888);
+			System.out.println("Waiting for client.");
+			
+			
+			Socket connectionToClient = SS.accept();
+			System.out.println("Connected.");
+			
+			
+		} 
+		catch (IOException e) {
+			System.err.println("Connection failed.");
+		}
+		*/
+		
+	System.out.print("Enter something: ");
+	BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+	
+	String command = "";
+	try {
+		command = br.readLine();
+	} 
+	catch (IOException e) {
+		
+		e.printStackTrace();
+	}
+	
+	System.out.println(command);
+	
+	
+	System.out.print("Enter something 2: ");
+	Scanner sc = new Scanner(System.in);
+	String wordsOrNumbers = sc.next();
+	System.out.println(wordsOrNumbers);
+	
+	
+		
+
+	}
+
+	
+}

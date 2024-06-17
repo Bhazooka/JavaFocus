@@ -1,0 +1,52 @@
+import UDP.client.Client;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+
+public class LeecherGUI extends Application {
+    private Client client; // You should define the Client class as per your application's requirements
+    private boolean isConnected = false;
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Leecher Mode");
+
+        // Elements and layout setup (same as in your original LeecherGUI class)
+
+        // Set up action listeners for buttons
+        
+
+        // Create a scene and set it on the stage
+        
+        
+
+        primaryStage.show();
+    }
+
+    // Define your action listeners here
+    private void setUpActionListeners(TextField addressField, TextField portField, Button connectButton,
+                                      Button getListButton, TextField getFileField, Button getFileButton,
+                                      TextArea listArea, TextArea statusArea) {
+        connectButton.setOnAction((event) -> {
+            // Your connect logic here
+        });
+
+        getListButton.setOnAction((event) -> {
+            // Your get list logic here
+        });
+
+        getFileButton.setOnAction((event) -> {
+            // Your get file logic here
+        });
+    }
+}

@@ -1,0 +1,235 @@
+package csc2b.server;
+import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.StringTokenizer;
+
+import javax.swing.plaf.metal.MetalIconFactory.FileIcon16;
+
+public class ZEDEMHandler implements Runnable {
+	
+	Socket clientConnection;
+	BufferedReader br;
+	PrintWriter pw;
+	DataOutputStream dos;
+	DataInputStream dis;
+
+	public ZEDEMHandler(Socket connection) {
+		this.clientConnection = connection;
+		
+		try {
+			br = new BufferedReader(new InputStreamReader(clientConnection.getInputStream()));
+			pw = new PrintWriter(clientConnection.getOutputStream());
+			dos = new DataOutputStream(clientConnection.getOutputStream());
+			dis = new DataInputStream(clientConnection.getInputStream());
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	@Override
+    public void run()
+    {
+	//Process commands from client
+    	boolean running = true;
+    	System.out.println("Handling client request");
+    	
+    	try {
+    		while(running) {
+	    		String request = "";
+	    		//read first request
+	    		request = br.readLine();	//reading the command (line) sent by the client
+	    		
+	    		if(request.startsWith("AUTH")) {
+	    			StringTokenizer token = new StringTokenizer(request);
+	    			String command = token.nextToken();
+	    			String userName = token.nextToken();
+	    			String password = token.nextToken();
+	    			//check if details match
+	    			if(matchUser(userName, password)==true) {
+		    			sendResponse("200 <"+command+" Command Successful>");
+	    			}
+	    			else {
+	    				sendResponse("500 <"+command+" Command Unsuccessful>");
+	    			}
+	    			
+	    		}
+	    		else if(request.contains("LIST")) {
+	    			
+	    			ArrayList<String> List = getFileList();
+	    			sendResponse("200 <"+request+" Command Successful>");
+	    			
+	    			for(String item : List) {
+		    			dos.writeUTF(item);		//the data output stream sends it to the client socket 2018
+	    			}							//it will be collect by the data input stream on the client side
+	    			
+	    		}
+	    		else if(request.startsWith("PDFRET")) {
+	    			String[] command = request.split(" ");	//the client sends ("PDFRET " + txtID.getText()), so we must break it down into command and File ID 
+	    			String ID = command[1];	//in the array we creeated, the file ID is the second item in the array(index 1)
+	    			idToFile(ID); 
+	    			
+	    		}
+	    		else if(request.equals("LOGOUT")) {
+	    			clientConnection.close();
+	    		}
+	    		else {
+	    			System.out.println("Invalid");
+	    		}
+    		}
+    	} catch (IOException e) {
+		
+			e.printStackTrace();
+		}
+   
+    	
+    	
+    }
+	
+	
+	
+	private boolean matchUser(String userN, String passW)
+	{
+		boolean found = false;
+		
+		//Code to search users.txt file for match with userN and passW.
+		File userFile = new File("data/server/users.txt");
+		try
+		{
+		    Scanner scan = new Scanner(userFile);
+		    while(scan.hasNextLine()&&!found)
+		    {
+				String line = scan.nextLine();
+				String lineSec[] = line.split("\\s");
+		    		
+				//***OMITTED - Enter code here to compare user*** 
+				if(userN.contains(lineSec[0]) && passW.contains(lineSec[1])) 
+				{
+					found = true;
+				}
+		    }
+		    scan.close();
+		}
+		catch(IOException ex)
+		{
+		    ex.printStackTrace();
+		}
+		
+		return found;
+	}
+	
+	
+    private ArrayList<String> getFileList()
+    {
+		ArrayList<String> result = new ArrayList<String>();
+		//Code to add list text file contents to the arraylist.
+		File lstFile = new File("data/server/List.txt");
+		try
+		{
+			Scanner scan = new Scanner(lstFile);
+
+			//***OMITTED - Read each line of the file and add to the arraylist***
+			
+			while(scan.hasNext()) {
+				String line = scan.nextLine();
+				StringTokenizer token = new StringTokenizer(line);
+				String ID = token.nextToken();
+				String fileName = token.nextToken();
+				result.add(ID+" "+fileName);
+			}
+			
+			scan.close();
+		}	    
+		catch(IOException ex)
+		{
+			ex.printStackTrace();
+		}
+		
+		return result;
+    }
+	
+	
+	
+	
+	private void idToFile(String ID)
+    {
+    	//Code to find the file name that matches strID
+    	File lstFile = new File("data/server/List.txt");
+    	try
+    	{
+    		
+    		//Handle the case where the id is invalid, (we only have 3 files)
+    		if(Integer.parseInt(ID) >= 4 )
+    		{
+    			sendResponse("<NEE File does not exist>");
+    		}
+    		else
+    		{
+        		Scanner scan = new Scanner(lstFile);	//scan the PdfList.txt file
+        		String line = "";		//create variable to store the data in there, a line is stored from the txtfile at a time per iteration
+        		
+        		//***OMITTED - Read filename from file and search for filename based on ID***
+        		while(scan.hasNext()) { //while theres still lines
+        			line = scan.nextLine();	//get the proceeding line, with cursor starting at the very beginning, meaning line 1 is the next line from the start 
+        			String[] arrLine = line.split(" ");	//split the lines, with space as a delimiter, meaning its split by words
+        			
+        			if(arrLine[0].contains(ID)) {	//the first character of each line is a number, if it matches the number ID passed by the user then...
+        				
+        				String fileName = arrLine[1];	//..then the file name corresponding to that string is the word in the index 1 of the arrLine created
+        				File file = new File("data/server/"+fileName); //create a new file object in the directory provided with the file name, this will store a copy of the data of the file that is requested, effectively making a download
+        				System.out.println("this file name #"+fileName);
+        				if(file.exists()) {	//if the file has been created, do this...
+        					pw.println("<JA PDF retreive Successful> #"+fileName+"#"+String.valueOf(file.length()));
+        					pw.flush();
+        					System.out.println("this file size #"+file.length()); 
+        					FileInputStream fis = new FileInputStream(file); //create the file input stream (which is a specialized version of InputStream for sending files effectively),
+        									//..creat fis that takes in the file created in that file path and... (this would be like opening the file to allow data to come in)
+                			byte[] buffer = new byte[1024]; //..create byte stream that will send each byte of data into that file
+                			
+                			int n = 0;
+                			
+                			while((n=fis.read(buffer))>0) {	
+                				dos.write(buffer, 0, n);
+                				dos.flush();
+                			}
+                			fis.close();
+        				}
+        				else{
+        					sendResponse("<NEE File does not exist>");
+        					System.out.println("FILE DNE");
+        				}
+        				break;
+        			}
+        			
+        			
+        			
+        		}
+        		scan.close();
+    		}
+    		
+    	}
+    	catch(IOException ex)
+    	{
+    		ex.printStackTrace();
+    	}
+   
+    }
+    
+    private void sendResponse(String response) {
+    	pw.println(response);
+    	pw.flush();
+    }
+	
+	
+	
+}

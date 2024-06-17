@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="NewWizardAction">
+	</section>
+	<section name="SmartImportWizard">
+		<item key="SmartImportRootWizardPage.STORE_HIDE_ALREADY_OPEN" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_CLOSE_IMPORTED" value="false"/>
+		<item key="SmartImportRootWizardPage.STORE_NESTED_PROJECTS" value="true"/>
+		<item key="SmartImportRootWizardPage.STORE_CONFIGURE_NATURES" value="true"/>
+		<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\Past Papers\ST2\Prac_07_Final_Practice"/>
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\Practicals\Prac 7\Prac_07"/>
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\Practicals\Prac 6 from other people\KABORE_I_222039483_CSC02B2_2023_P06"/>
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\VOLDI_M_222031434_CSC2B_2023_PRAC6"/>
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\YEARS PASSED\CSC02B2 (MATHOLE 2022 Go to File)\Workspace\Practicals\Practical_06"/>
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\Practicals\Practice\Natasha"/>
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\Practicals\Natasha"/>
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\YEARS PASSED\CSC02B2 (MATHOLE 2022 Go to File)\Practicals\MATHOLE_KB_220017565_CSC02B2_2022_P04"/>
+			<item value="C:\Users\barbu\Desktop\University Course Modules\2B\CSC02B2\YEARS PASSED\CSC02B2 (MATHOLE 2022 Go to File)\Practicals\MATHOLE_KB_220017565_CSC02B2_2022_P02"/>
+		</list>
+	</section>
+</section>

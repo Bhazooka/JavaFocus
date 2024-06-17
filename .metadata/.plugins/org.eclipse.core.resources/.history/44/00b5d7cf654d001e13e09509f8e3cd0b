@@ -1,0 +1,101 @@
+package GUI;
+
+import UDP.client.Client;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+
+public class LeecherGUI extends Application {
+    private Client client; // You should define the Client class as per your application's requirements
+    private boolean isConnected = false;
+
+    public static void LeecherGUI(String[] args) {
+        launch(args);
+    }
+
+    @Override
+    public void start(Stage primaryStage) {
+        primaryStage.setTitle("Leecher Mode");
+
+        // Elements
+        Label leecherLabel = new Label("Leecher Mode");
+        Label conToServerLabel = new Label("Connect To Seeder");
+        Label addressLabel = new Label("Address");
+        TextField addressField = new TextField("localhost");
+        Label portLabel = new Label("Port");
+        TextField portField = new TextField("2022");
+        Button connectButton = new Button("Connect");
+        Label requestLabel = new Label("Request");
+        Button getListButton = new Button("Get List");
+        Label getFileLabel = new Label("Get File");
+        TextField getFileField = new TextField();
+        Button getFileButton = new Button("Get File");
+        TextArea listArea = new TextArea("List:\n");
+        TextArea statusArea = new TextArea("Status Area:\n");
+
+        // Arranging
+        HBox firstHBox = new HBox(10, addressLabel, addressField, portLabel, portField, connectButton);
+        HBox secHBox = new HBox(10, getListButton, getFileLabel, getFileField, getFileButton);
+
+        VBox vBox = new VBox(20, leecherLabel, conToServerLabel, firstHBox, requestLabel, secHBox, listArea, statusArea);
+
+        // Styling
+        leecherLabel.setFont(Font.font("Arial", FontWeight.BOLD, 24));
+        conToServerLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        conToServerLabel.setUnderline(true);
+        addressLabel.setFont(Font.font("Arial", FontWeight.SEMI_BOLD, 16));
+        requestLabel.setFont(Font.font("Arial", FontWeight.BOLD, 18));
+        requestLabel.setUnderline(true);
+        portLabel.setFont(Font.font("Arial", FontWeight.SEMI_BOLD, 16));
+        getFileLabel.setFont(Font.font("Arial", FontWeight.SEMI_BOLD, 16));
+        listArea.setEditable(false);
+        statusArea.setEditable(false);
+        statusArea.setMaxHeight(100);
+        listArea.setMaxHeight(150);
+        portField.setMaxWidth(80);
+        getFileField.setMaxWidth(80);
+
+        // Adding
+        vBox.setAlignment(Pos.CENTER);
+        vBox.setPadding(new Insets(20));
+
+        // Create a cool background
+        BackgroundFill backgroundFill = new BackgroundFill(
+                javafx.scene.paint.Color.LIGHTBLUE, new CornerRadii(0), new Insets(0)
+        );
+        Background background = new Background(backgroundFill);
+        vBox.setBackground(background);
+
+        // Create a scene and set it on the stage
+        Scene scene = new Scene(vBox, 500, 400);
+        primaryStage.setScene(scene);
+
+        primaryStage.show();
+
+        // Set up action listeners for buttons here
+        setUpActionListeners(addressField, portField, connectButton, getListButton, getFileField, getFileButton, listArea, statusArea);
+    }
+
+    // Define your action listeners here
+    private void setUpActionListeners(TextField addressField, TextField portField, Button connectButton,
+                                      Button getListButton, TextField getFileField, Button getFileButton,
+                                      TextArea listArea, TextArea statusArea) {
+        connectButton.setOnAction((event) -> {
+            // Your connect logic here
+        });
+
+        getListButton.setOnAction((event) -> {
+            // Your get list logic here
+        });
+
+        getFileButton.setOnAction((event) -> {
+            // Your get file logic here
+        });
+    }
+}
